@@ -10,7 +10,7 @@ This project is for Wechat Official Accounts.
 
 xwechat/xwechat is the project folder.
 
-xwechat/xfullstack is the Wechat Official Accounts xFullStack Interface.
+xwechat/wechat is the Wechat Official Accounts xFullStack Interface.
 
 xwechat/site-packages is the third party libraries for SAE.
 
@@ -18,7 +18,13 @@ xwechat/config.yaml is for SAE.
 
 xwechat/index.wsgi is for SAE.
 
-xwechat/xfullstack.sql is for SAE Mysql.
+xwechat/xwechat.sql is for SAE Mysql.
+
+======
+wechat
+======
+
+The interface for Wechat.
 
 ==========
 xfullstack
