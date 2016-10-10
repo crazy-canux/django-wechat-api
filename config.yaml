@@ -1,0 +1,10 @@
+name: xwechat
+version: 1
+
+libraries:
+- name: "django"
+  version: "1.8.2"
+
+handlers:
+- url: /static
+  static_dir: static
