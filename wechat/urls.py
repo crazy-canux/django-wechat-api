@@ -14,5 +14,5 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.wechat, name='wechat'),
+    url(r'^$', views.wechat_varify, name='wechat_varify'),
 ]

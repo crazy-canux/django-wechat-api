@@ -15,11 +15,11 @@ from send_message import BasicSend, SendText
 from image_how_old import image_how_old
 
 
-WECHAT_TOKEN = "canuxcheng"
+WECHAT_TOKEN = "canux"
 
 
 @csrf_exempt
-def wechat(request):
+def wechat_varify(request):
     """Basic function used to conmunicate with wechat.
 
     GET means wechat server make connection with django server.
