@@ -5,6 +5,9 @@ libraries:
 - name: "django"
   version: "1.8.2"
 
+- name: "lxml"
+  version: "3.3.3"
+
 handlers:
 - url: /static
   static_dir: static
