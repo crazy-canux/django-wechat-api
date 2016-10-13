@@ -81,7 +81,7 @@ class WechatRequest(object):
         # Response to different request message type.
         if msg_type == BasicReceive.REQ_MESSAGE_TYPE_TEXT:
             # Receive text message from wechat user.
-            receive_text_content = request_map.get('Content')
+            receive_text_content = request_map.get(u'Content')
             send_text_content = receive_text_content
         elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_IMAGE:
             # Get image message from wechat user.

@@ -5,7 +5,7 @@ Use http://how-old.net to analyze the sex and age of the picture.
 
 Copyright (C) 2016 Canux CHENG.
 All rights reserved.
-Name: how_old.py
+Name: image_how_old.py
 Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
 Time: Mon 10 Oct 2016 12:45:48 AM EDT
@@ -21,7 +21,7 @@ import requests
 def how_old(image_url):
     """Get the sex and age from how-old.net."""
     s = requests.session()
-    url = "http://how-old.net/Home/Analyze?isTest=False&amp;source=&amp;version=001"
+    url = "http://how-old.net/Home/Analyze?isTest=False&source=&version=001"
     header = {
         "Accept-Encoding": "gzip, deflate",
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:34.0) Gecko/20100101 Firefox/34.0",
@@ -52,3 +52,6 @@ def image_how_old(image_url):
         resp_content = '识别结果为人妖'
     finally:
         return resp_content
+
+if __name__ == "__main__":
+    print image_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
