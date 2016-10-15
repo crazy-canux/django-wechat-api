@@ -12,7 +12,7 @@ from receive_message import BasicReceive, TextMsg, ImageMsg
 from send_message import BasicSend, Text
 from image_how_old import image_how_old
 
-WECHAT_TOKEN = "canux"
+WECHAT_TOKEN = u"canux"
 
 # Send/response message types to wechat user.
 RESP_MESSAGE_TYPE_TEXT = u'text'
@@ -82,13 +82,13 @@ class WechatRequest(object):
         tmp_list.sort()
 
         # Wechat office method
-        # sha1 = hashlib.sha1()
-        # map(sha1.update, tmp_list)
-        # hashcode = sha1.hexdigest()
+        sha1 = hashlib.sha1()
+        map(sha1.update, tmp_list)
+        hashcode = sha1.hexdigest()
 
         # My own method
-        tmp_str = '%s%s%s' % tuple(tmp_list)
-        hashcode = hashlib.sha1(tmp_str).hexdigest()
+        # tmp_str = '%s%s%s' % tuple(tmp_list)
+        # hashcode = hashlib.sha1(tmp_str).hexdigest()
 
         if hashcode == signature:
             print("get succeed")
@@ -113,7 +113,7 @@ class WechatRequest(object):
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             Content = receive_text_object.Content
-            send_text_object = Text(FromUserName, ToUserName, Content)
+            send_text_object = Text(FromUserName, ToUserName, Content.encode('utf-8'))
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
             receive_image_object = ImageMsg(request_map)
