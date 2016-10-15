@@ -19,6 +19,7 @@ import requests
 
 f = codecs.open(u'test.xml', u'r', u'utf-8')
 content = u''.join(f.readlines())
+f.close()
 
 url = "http://127.0.0.1:8000/wechat/"
 result = requests.post(url, data=content.encode(u'utf-8'))

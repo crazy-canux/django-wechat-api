@@ -83,7 +83,7 @@ class WechatRequest(object):
         # sha1 = hashlib.sha1()
         # map(sha1.update, tmp_list)
         # hashcode = sha1.hexdigest()
-        tmp_str = '%s%s%s' % tuple(tmp_list)
+        tmp_str = ''.join([s for s in tmp_list])
         hashcode = hashlib.sha1(tmp_str).hexdigest()
 
         if hashcode == signature:
@@ -101,7 +101,9 @@ class WechatRequest(object):
         MsgType = receive_basic_object.MsgType
         print(MsgType)
         ToUserName = receive_basic_object.ToUserName
+        print(ToUserName)
         FromUserName = receive_basic_object.FromUserName
+        print(FromUserName)
 
         # Response to different request message type.
         if MsgType == REQ_MESSAGE_TYPE_TEXT:

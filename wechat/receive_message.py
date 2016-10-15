@@ -20,7 +20,7 @@ class BasicReceive(object):
         self.ToUserName = msg_dict.get("ToUserName")
         self.FromUserName = msg_dict.get("FromUserName")
         self.CreateTime = msg_dict.get("CreateTime")
-        self.MsgType = msg_dict.get("MsgTyp")
+        self.MsgType = msg_dict.get("MsgType")
         self.MsgId = msg_dict.get("MsgId")
 
 
