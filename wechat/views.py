@@ -28,6 +28,7 @@ REQ_MESSAGE_TYPE_TEXT = u'text'
 REQ_MESSAGE_TYPE_IMAGE = u'image'
 REQ_MESSAGE_TYPE_VOICE = u'voice'
 REQ_MESSAGE_TYPE_VIDEO = u'video'
+REQ_MESSAGE_TYPE_SHORTVIDEO = u'shortvideo'
 REQ_MESSAGE_TYPE_LOCATION = u'location'
 REQ_MESSAGE_TYPE_LINK = u'link'
 REQ_MESSAGE_TYPE_EVENT = u'event'
@@ -35,12 +36,10 @@ REQ_MESSAGE_TYPE_EVENT = u'event'
 # Event type from wechat user.
 Event_SUBSCRIBE = u'subscribe'
 Event_UNSUBSCRIBE = u'unsubscribe'
+Event_SCAN = u'SCAN'
 Event_LOCATION = u'LOCATION'
 Event_CLICK = u'CLICK'
 Event_VIEW = u'VIEW'
-Event_SCAN = u'SCAN'
-Event_SCANCODE_WAITMSG = u'scancode_waitmsg'
-Event_SCANCODE_PUSH = U'scancode_push'
 
 
 @csrf_exempt
@@ -53,9 +52,11 @@ def wechat_varify(request):
     """
     if request.method == "GET":
         # Wechat server sent GET request to the URL to verify.
+        print("Start to get")
         return HttpResponse(WechatRequest.get_request(request))
     elif request.method == "POST":
         # Wechat user POST the message to the URL with XML format.
+        print("Start to post")
         return HttpResponse(WechatRequest.post_request(request))
     else:
         return None
@@ -84,15 +85,19 @@ class WechatRequest(object):
         hashcode = sha1.hexdigest()
 
         if hashcode == signature:
+            print("get succeed")
             return echostr
         else:
+            print("get failed")
             return ""
 
     @staticmethod
     def post_request(request):
         request_map = MessageUtil.parse_xml(request)
+        print(request_map)
         receive_basic_object = BasicReceive(request_map)
         MsgType = receive_basic_object.MsgType
+        print(MsgType)
         ToUserName = receive_basic_object.ToUserName
         FromUserName = receive_basic_object.FromUserName
 
@@ -112,6 +117,8 @@ class WechatRequest(object):
             pass
         elif MsgType == REQ_MESSAGE_TYPE_VIDEO:
             pass
+        elif MsgType == REQ_MESSAGE_TYPE_SHORTVIDEO:
+            pass
         elif MsgType == REQ_MESSAGE_TYPE_LOCATION:
             pass
         elif MsgType == REQ_MESSAGE_TYPE_LINK:
@@ -122,15 +129,13 @@ class WechatRequest(object):
                 pass
             elif Event == Event_UNSUBSCRIBE:
                 pass
+            elif Event == Event_SCAN:
+                pass
             elif Event == Event_LOCATION:
                 pass
             elif Event == Event_CLICK:
                 pass
             elif Event == Event_VIEW:
-                pass
-            elif Event == Event_SCANCODE_WAITMSG:
-                pass
-            elif Event == Event_SCANCODE_PUSH:
                 pass
             else:
                 pass
