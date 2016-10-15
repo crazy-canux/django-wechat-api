@@ -113,7 +113,7 @@ class WechatRequest(object):
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             Content = receive_text_object.Content
-            send_text_object = Text(FromUserName, ToUserName, Content.encode('utf-8'))
+            send_text_object = Text(FromUserName, ToUserName, Content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
             receive_image_object = ImageMsg(request_map)
