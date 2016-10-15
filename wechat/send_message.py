@@ -16,7 +16,22 @@ Details:
 import time
 
 
-class Text(object):
+class BasicSend(object):
+
+    """If django server can not response in 5 seconds, must reply 'success' or NULL or wechat server have 3 times to retry.
+
+    So, If you don't want to reply this kinds of receive message, just reply 'success' to tell wechat server you already know.
+    Or wechat will reply '该公众号暂时无法提供服务，请稍后再试' automatic.
+    """
+
+    def __init__(self):
+        pass
+
+    def send(self):
+        return "success"
+
+
+class Text(BasicSend):
 
     """Basic text object class."""
 
@@ -40,7 +55,7 @@ class Text(object):
         return xml_form.format(**self.__dict)
 
 
-class Image(object):
+class Image(BasicSend):
 
     """Basic Image object class."""
 
@@ -66,7 +81,7 @@ class Image(object):
         return xml_form.format(**self.__dict)
 
 
-class Voice(object):
+class Voice(BasicSend):
 
     """Basic voice class."""
 
@@ -92,7 +107,7 @@ class Voice(object):
         return xml_form.format(**self.__dict)
 
 
-class Video(object):
+class Video(BasicSend):
 
     """Basic video class."""
 
@@ -122,7 +137,7 @@ class Video(object):
         return xml_form.format(**self.__dict)
 
 
-class Music(object):
+class Music(BasicSend):
 
     """Basic music class."""
 
@@ -156,7 +171,7 @@ class Music(object):
         return xml_form.format(**self.__dict)
 
 
-class News(object):
+class News(BasicSend):
 
     """Basic news object class."""
 

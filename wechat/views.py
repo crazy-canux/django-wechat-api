@@ -9,7 +9,7 @@ import hashlib
 from lxml import etree
 
 from receive_message import BasicReceive, TextMsg, ImageMsg
-from send_message import Text
+from send_message import BasicSend, Text
 from image_how_old import image_how_old
 
 WECHAT_TOKEN = "canux"
@@ -114,33 +114,33 @@ class WechatRequest(object):
             send_text_object = Text(FromUserName, ToUserName, Content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_VOICE:
-            pass
+            return BasicSend().send()
         elif MsgType == REQ_MESSAGE_TYPE_VIDEO:
-            pass
+            return BasicSend().send()
         elif MsgType == REQ_MESSAGE_TYPE_SHORTVIDEO:
-            pass
+            return BasicSend().send()
         elif MsgType == REQ_MESSAGE_TYPE_LOCATION:
-            pass
+            return BasicSend().send()
         elif MsgType == REQ_MESSAGE_TYPE_LINK:
-            pass
+            return BasicSend().send()
         elif MsgType == REQ_MESSAGE_TYPE_EVENT:
             Event = request_map.get(u'Event')
             if Event == Event_SUBSCRIBE:
-                pass
+                return BasicSend().send()
             elif Event == Event_UNSUBSCRIBE:
-                pass
+                return BasicSend().send()
             elif Event == Event_SCAN:
-                pass
+                return BasicSend().send()
             elif Event == Event_LOCATION:
-                pass
+                return BasicSend().send()
             elif Event == Event_CLICK:
-                pass
+                return BasicSend().send()
             elif Event == Event_VIEW:
-                pass
+                return BasicSend().send()
             else:
-                pass
+                return BasicSend().send()
         else:
-            pass
+            return BasicSend().send()
 
 
 class MessageUtil(object):
