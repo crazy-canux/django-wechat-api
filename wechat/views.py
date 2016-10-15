@@ -80,11 +80,14 @@ class WechatRequest(object):
 
         tmp_list = [token, timestamp, nonce]
         tmp_list.sort()
-        # sha1 = hashlib.sha1()
-        # map(sha1.update, tmp_list)
-        # hashcode = sha1.hexdigest()
-        tmp_str = ''.join([s for s in tmp_list])
-        hashcode = hashlib.sha1(tmp_str).hexdigest()
+        # Wechat office example method:
+        sha1 = hashlib.sha1()
+        map(sha1.update, tmp_list)
+        hashcode = sha1.hexdigest()
+        # This 2 methods both work.
+        # tmp_str = ''.join([s for s in tmp_list])
+        # tmp_str = '%s%s%s' % tuple(tmp_list)
+        # hashcode = hashlib.sha1(tmp_str).hexdigest()
 
         if hashcode == signature:
             print("get succeed")
