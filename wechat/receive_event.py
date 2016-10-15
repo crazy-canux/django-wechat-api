@@ -1,73 +1,86 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Receive event message from wechat server to django server.
+Wechat user send event to wechat server and transfer to django server.
 
 Copyright (C) 2016 Canux CHENG.
 All rights reserved.
 Name: receive_event.py
 Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
-Time: Tue 11 Oct 2016 12:50:44 AM EDT
+Time: Fri 14 Oct 2016 11:36:50 AM EDT
+
+DETAILS:
+         7.1 event - subscribe
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[subscribe]]></Event>
+         </xml>
+
+         7.2 event - unsubscribe
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[unsubscribe]]></Event>
+         </xml>
+
+         7.3 event - subscribe 用户未关注时扫描带参数二维码事件，用户可以关注公众号，关注后将带场景值扫描事件推送给开发者
+         <xml><ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[subscribe]]></Event>
+         <EventKey><![CDATA[qrscene_123123]]></EventKey>
+         <Ticket><![CDATA[TICKET]]></Ticket>
+         </xml>
+
+         7.4 event - SCAN 用户已关注时扫描带参数二维码事件，将带场景值扫描事件推送给开发者
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[SCAN]]></Event>
+         <EventKey><![CDATA[SCENE_VALUE]]></EventKey>
+         <Ticket><![CDATA[TICKET]]></Ticket>
+         </xml>
+
+         7.5 event - LOCATION
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[fromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[LOCATION]]></Event>
+         <Latitude>23.137466</Latitude>
+         <Longitude>113.352425</Longitude>
+         <Precision>119.385040</Precision>
+         </xml>
+
+         7.6 event - CLICK 点击菜单拉取消息时的事件推送
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[CLICK]]></Event>
+         <EventKey><![CDATA[EVENTKEY]]></EventKey>
+         </xml>
+
+         7.7 event - VIEW 点击菜单跳转链接时的事件推送
+         <xml>
+         <ToUserName><![CDATA[toUser]]></ToUserName>
+         <FromUserName><![CDATA[FromUser]]></FromUserName>
+         <CreateTime>123456789</CreateTime>
+         <MsgType><![CDATA[event]]></MsgType>
+         <Event><![CDATA[VIEW]]></Event>
+         <EventKey><![CDATA[www.qq.com]]></EventKey>
+         </xml>
 """
 
 
-class BasicEvent(object):
-
-    """Basic event object class."""
-
-    def __init__(self):
-        # Event type from wechat user.
-        EVENT_TYPE_SUBSCRIBE = u'subscribe'
-        EVENT_TYPE_UNSUBSCRIBE = u'unsubscribe'
-        EVENT_TYPE_LOCATION = u'location'
-        EVENT_TYPE_CLICK = u'click'
-        EVENT_TYPE_VIEW = u'view'
-        EVENT_TYPE_SCAN = u'scan'
-        # Scan with tips
-        EVENT_TYPE_SCANCODE_WAITMSG = u'scancode_waitmsg'
-        # Scan push event
-        EVENT_TYPE_SCANCODE_PUSH = U'scancode_push'
-
-        # All send message have this arguments.
-        self.to_user_name = u''
-        self.from_user_name = u''
-        self.create_time = 0L
-        self.msg_type = u''
-        self.msg_id = 0L
-        # All event have this arguments.
-        self.to_user_name = u''
-        self.from_user_name = u''
-        self.create_time = 0L
-        self.msg_type = u''
-        self.event = u''
-
-    def get_to_user_name(self):
-        return self.to_user_name
-
-    def set_to_user_name(self, to_user_name):
-        self.to_user_name = to_user_name
-
-    def get_from_user_name(self):
-        return self.from_user_name
-
-    def set_from_user_name(self, from_user_name):
-        self.from_user_name = from_user_name
-
-    def get_create_time(self):
-        return self.create_time
-
-    def set_create_time(self, create_time):
-        self.create_time = create_time
-
-    def get_msg_type(self):
-        return self.msg_type
-
-    def set_msg_type(self, msg_type):
-        self.msg_type = msg_type
-
-    def get_event(self):
-        return self.event
-
-    def set_event(self, event):
-        self.event = event

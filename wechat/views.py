@@ -1,21 +1,46 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
-
-# Create your views here.
+# from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 import hashlib
-import time
+
+# TPL
 from lxml import etree
 
-from receive_message import BasicReceive
-from receive_event import BasicEvent
-from send_message import BasicSend, SendText
+from receive_message import BasicReceive, TextMsg, ImageMsg
+from send_message import Text
 from image_how_old import image_how_old
 
-
 WECHAT_TOKEN = "canux"
+
+# Send/response message types to wechat user.
+RESP_MESSAGE_TYPE_TEXT = u'text'
+RESP_MESSAGE_TYPE_IMAGE = u'image'
+RESP_MESSAGE_TYPE_VOICE = u'voice'
+RESP_MESSAGE_TYPE_VIDEO = u'video'
+RESP_MESSAGE_TYPE_MUSIC = u'music'
+RESP_MESSAGE_TYPE_NEWS = u'news'
+MESSAGE_TYPE = [u'text', u'image', u'voice', u'video', u'music', u'news']
+
+# Receive/request message type from wechat user.
+REQ_MESSAGE_TYPE_TEXT = u'text'
+REQ_MESSAGE_TYPE_IMAGE = u'image'
+REQ_MESSAGE_TYPE_VOICE = u'voice'
+REQ_MESSAGE_TYPE_VIDEO = u'video'
+REQ_MESSAGE_TYPE_LOCATION = u'location'
+REQ_MESSAGE_TYPE_LINK = u'link'
+REQ_MESSAGE_TYPE_EVENT = u'event'
+
+# Event type from wechat user.
+Event_SUBSCRIBE = u'subscribe'
+Event_UNSUBSCRIBE = u'unsubscribe'
+Event_LOCATION = u'LOCATION'
+Event_CLICK = u'CLICK'
+Event_VIEW = u'VIEW'
+Event_SCAN = u'SCAN'
+Event_SCANCODE_WAITMSG = u'scancode_waitmsg'
+Event_SCANCODE_PUSH = U'scancode_push'
 
 
 @csrf_exempt
@@ -41,86 +66,76 @@ class WechatRequest(object):
     """Implement the basic function for GET and POST.
 
     request is django.http.HttpRequest object.
+    response is django.http.HttpResponse object.
     """
 
     @staticmethod
     def get_request(request):
-        token = WECHAT_TOKEN
+        signature = request.GET.get("signature", None)
         timestamp = request.GET.get("timestamp", None)
         nonce = request.GET.get("nonce", None)
-        signature = request.GET.get("signature", None)
         echostr = request.GET.get("echostr", None)
+        token = WECHAT_TOKEN
 
         tmp_list = [token, timestamp, nonce]
         tmp_list.sort()
-        tmp_str = "%s%s%s" % tuple(tmp_list)
-        tmp_str = hashlib.sha1(tmp_str).hexdigest()
+        sha1 = hashlib.sha1()
+        map(sha1.update, tmp_list)
+        hashcode = sha1.hexdigest()
 
-        if tmp_str == signature:
+        if hashcode == signature:
             return echostr
         else:
-            return None
+            return ""
 
     @staticmethod
     def post_request(request):
         request_map = MessageUtil.parse_xml(request)
-        # All receive messages have this arguments.
-        to_user_name = request_map.get(u'ToUserName')
-        from_user_name = request_map.get(u'FromUserName')
-        create_time = request_map.get(u'CreateTime')
-        msg_type = request_map.get(u'MsgType')
-        msg_id = request_map.get(u'MsgId')
-
-        # Init basic arguments for SendText object.
-        send_text_object = SendText()
-        send_text_object.set_to_user_name(from_user_name)
-        send_text_object.set_from_user_name(to_user_name)
-        send_text_object.set_create_time(time.time())
-        send_text_object.set_msg_type(BasicSend.RESP_MESSAGE_TYPE_TEXT)
+        receive_basic_object = BasicReceive(request_map)
+        MsgType = receive_basic_object.MsgType
+        ToUserName = receive_basic_object.ToUserName
+        FromUserName = receive_basic_object.FromUserName
 
         # Response to different request message type.
-        if msg_type == BasicReceive.REQ_MESSAGE_TYPE_TEXT:
-            # Receive text message from wechat user.
-            receive_text_content = request_map.get(u'Content')
-            send_text_content = receive_text_content
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_IMAGE:
-            # Get image message from wechat user.
-            pic_url = request_map.get('PicUrl')
-            send_text_content = image_how_old(pic_url)
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_VOICE:
+        if MsgType == REQ_MESSAGE_TYPE_TEXT:
+            receive_text_object = TextMsg(request_map)
+            Content = receive_text_object.Content
+            send_text_object = Text(FromUserName, ToUserName, Content)
+            return send_text_object.send()
+        elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
+            receive_image_object = ImageMsg(request_map)
+            PicUrl = receive_image_object.PicUrl
+            Content = image_how_old(PicUrl)
+            send_text_object = Text(FromUserName, ToUserName, Content)
+            return send_text_object.send()
+        elif MsgType == REQ_MESSAGE_TYPE_VOICE:
             pass
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_VIDEO:
+        elif MsgType == REQ_MESSAGE_TYPE_VIDEO:
             pass
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_LOCATION:
+        elif MsgType == REQ_MESSAGE_TYPE_LOCATION:
             pass
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_LINK:
+        elif MsgType == REQ_MESSAGE_TYPE_LINK:
             pass
-        elif msg_type == BasicReceive.REQ_MESSAGE_TYPE_EVENT:
-            event_type = request_map.get(u'Event')
-            if event_type == BasicEvent.EVENT_TYPE_SUBSCRIBE:
-                send_text_content = "感谢您的关注!"
-            elif event_type == BasicEvent.EVENT_TYPE_UNSUBSCRIBE:
+        elif MsgType == REQ_MESSAGE_TYPE_EVENT:
+            Event = request_map.get(u'Event')
+            if Event == Event_SUBSCRIBE:
                 pass
-            elif event_type == BasicEvent.EVENT_TYPE_LOCATION:
+            elif Event == Event_UNSUBSCRIBE:
                 pass
-            elif event_type == BasicEvent.EVENT_TYPE_CLICK:
+            elif Event == Event_LOCATION:
                 pass
-            elif event_type == BasicEvent.EVENT_TYPE_VIEW:
+            elif Event == Event_CLICK:
                 pass
-            elif event_type == BasicEvent.EVENT_TYPE_SCANCODE_WAITMSG:
+            elif Event == Event_VIEW:
                 pass
-            elif event_type == BasicEvent.EVENT_TYPE_SCANCODE_PUSH:
+            elif Event == Event_SCANCODE_WAITMSG:
+                pass
+            elif Event == Event_SCANCODE_PUSH:
                 pass
             else:
-                send_text_content = '输入无法识别的事件类型。'
+                pass
         else:
-            send_text_content = '输入无法识别的消息类型。'
-
-        send_text_object.set_content(send_text_content)
-        # Transfer message to xml format.
-        send_xml = MessageUtil.to_xml(send_text_object)
-        # Send the xml to wechat user.
-        return send_xml
+            pass
 
 
 class MessageUtil(object):
@@ -147,30 +162,3 @@ class MessageUtil(object):
             else:
                 dict_xml[node0.tag] = node0.text
         return dict_xml
-
-    @staticmethod
-    def to_xml(message_object):
-        """Convert send message object to xml format and send to wechat server."""
-        root = etree.Element(u'xml')
-        for key, value in vars(message_object).items():
-            if key in BasicSend.MESSAGETYPE:
-                tmproot = etree.SubElement(root, key)
-                if key == u'News':
-                    for each_news in value:
-                        etree.SubElement(tmproot, u'item')
-                        for tmpkey, tmpvalue in vars(each_news).items():
-                            tmpkey_ele = etree.SubElement(tmproot, tmpkey)
-                            tmpkey_ele.text = etree.CDATA(unicode(tmpvalue))
-                else:
-                    for tmpkey, tmpvalue in vars(message_object.__getattribute__(key)).items():
-                        tmpkey_ele = etree.SubElement(tmproot, tmpkey)
-                    if u'time' in tmpkey.lower() or u'count' in tmpkey.lower():
-                        tmpkey_ele.text = unicode(tmpvalue)
-                    else:
-                        tmpkey_ele.text = etree.CDATA(unicode(tmpvalue))
-            else:
-                if u'time' in key.lower() or u'count' in key.lower():
-                    etree.SubElement(root, key).text = unicode(value)
-                else:
-                    etree.SubElement(root, key).text = etree.CDATA(unicode(value))
-        return etree.tostring(root, pretty_print=True, xml_declaration=False, encoding=u'utf-8')

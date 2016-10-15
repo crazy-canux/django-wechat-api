@@ -1,72 +1,177 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Receive message from wechat server to django server.
+Wechat user send message to wechat server and transfer to django server.
 
 Copyright (C) 2016 Canux CHENG.
 All rights reserved.
 Name: receive_message.py
 Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
-Time: Tue 11 Oct 2016 12:22:40 AM EDT
-
-Details:
-    check the wechat doc, just support 6 kinds of message types.
+Time: Fri 14 Oct 2016 11:04:21 AM EDT
 """
 
 
 class BasicReceive(object):
 
-    """Basic class for receive message.
+    """Basic class for reveive message."""
 
-    All message django server send to wechat server must have this four arguments.
-    Wechat Just support send [text, image, voice, video, music, news].
+    def __init__(self, msg_dict):
+        self.ToUserName = msg_dict.get("ToUserName")
+        self.FromUserName = msg_dict.get("FromUserName")
+        self.CreateTime = msg_dict.get("CreateTime")
+        self.MsgType = msg_dict.get("MsgTyp")
+        self.MsgId = msg_dict.get("MsgId")
+
+
+class TextMsg(BasicReceive):
+
+    """Basic class for receive text message.
+
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1348831860</CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content><![CDATA[this is a test]]></Content>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
     """
 
-    def __init__(self):
-        """Init some definition for message types."""
-        # Receive/request message type from wechat user.
-        REQ_MESSAGE_TYPE_TEXT = u'text'
-        REQ_MESSAGE_TYPE_IMAGE = u'image'
-        REQ_MESSAGE_TYPE_VOICE = u'voice'
-        REQ_MESSAGE_TYPE_VIDEO = u'video'
-        REQ_MESSAGE_TYPE_LOCATION = u'location'
-        REQ_MESSAGE_TYPE_LINK = u'link'
-        REQ_MESSAGE_TYPE_EVENT = u'event'
+    def __init__(self, msg_dict):
+        super(TextMsg, self).__init__(msg_dict)
+        self.Content = msg_dict.get("Content")
 
-        # All send message have this arguments.
-        self.to_user_name = u''
-        self.from_user_name = u''
-        self.create_time = 0L
-        self.msg_type = u''
-        self.msg_id = 0L
 
-    def get_to_user_name(self):
-        return self.to_user_name
+class ImageMsg(BasicReceive):
 
-    def set_to_user_name(self, to_user_name):
-        self.to_user_name = to_user_name
+    """Basic class for receive image message.
 
-    def get_from_user_name(self):
-        return self.from_user_name
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1348831860</CreateTime>
+    <MsgType><![CDATA[image]]></MsgType>
+    <PicUrl><![CDATA[this is a url]]></PicUrl>
+    <MediaId><![CDATA[media_id]]></MediaId>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
 
-    def set_from_user_name(self, from_user_name):
-        self.from_user_name = from_user_name
+    def __init__(self, msg_dict):
+        super(ImageMsg, self).__init__(msg_dict)
+        self.PicUrl = msg_dict.get("PicUrl")
+        self.MediaId = msg_dict.get("MediaID")
 
-    def get_create_time(self):
-        return self.create_time
 
-    def set_create_time(self, create_time):
-        self.create_time = create_time
+class VoiceMsg(BasicReceive):
 
-    def get_msg_type(self):
-        return self.msg_type
+    """Basic class for receive voice message.
 
-    def set_msg_type(self, msg_type):
-        self.msg_type = msg_type
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1357290913</CreateTime>
+    <MsgType><![CDATA[voice]]></MsgType>
+    <MediaId><![CDATA[media_id]]></MediaId>
+    <Format><![CDATA[Format]]></Format>
+    <Recognition><![CDATA[腾讯微信团队]]></Recognition>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
 
-    def get_msg_id(self):
-        return self.mgs_id
+    def __init__(self, msg_dict):
+        super(VoiceMsg, self).__init__(msg_dict)
+        self.MediaId = msg_dict.get("MediaId")
+        self.Format = msg_dict.get("Format")
+        self.Recognition = msg_dict.get("Recognition")
 
-    def set_msg_id(self, msg_id):
-        self.msg_id = msg_id
+
+class VideoMsg(BasicReceive):
+
+    """Basic class for receive video message.
+
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1357290913</CreateTime>
+    <MsgType><![CDATA[video]]></MsgType>
+    <MediaId><![CDATA[media_id]]></MediaId>
+    <ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
+
+    def __init__(self, msg_dict):
+        super(VideoMsg, self).__init__(msg_dict)
+        self.MediaId = msg_dict.get("MsgId")
+        self.ThumbMediaId = msg_dict.get("ThumbMediaId")
+
+
+class ShortVideoMsg(BasicReceive):
+
+    """Basic class for receive shortvideo message.
+
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1357290913</CreateTime>
+    <MsgType><![CDATA[shortvideo]]></MsgType>
+    <MediaId><![CDATA[media_id]]></MediaId>
+    <ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
+
+    def __init__(self, msg_dict):
+        super(ShortVideoMsg, self).__init__(msg_dict)
+        self.MediaId = msg_dict.get("MsgId")
+        self.ThumbMediaId = msg_dict.get("ThumbMediaId")
+
+
+class LocationMsg(BasicReceive):
+
+    """Basic class for receive location message.
+
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1351776360</CreateTime>
+    <MsgType><![CDATA[location]]></MsgType>
+    <Location_X>23.134521</Location_X>
+    <Location_Y>113.358803</Location_Y>
+    <Scale>20</Scale>
+    <Label><![CDATA[位置信息]]></Label>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
+
+    def __init__(self, msg_dict):
+        super(LocationMsg, self).__init__(msg_dict)
+        self.Location_X = msg_dict.get("Location_X")
+        self.Location_Y = msg_dict.get("Location_Y")
+        self.Scale = msg_dict.get("Scale")
+        self.Label = msg_dict.get("Label")
+
+
+class LinkMsg(BasicReceive):
+
+    """Basic class for receive link message.
+
+    <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>1351776360</CreateTime>
+    <MsgType><![CDATA[link]]></MsgType>
+    <Title><![CDATA[公众平台官网链接]]></Title>
+    <Description><![CDATA[公众平台官网链接]]></Description>
+    <Url><![CDATA[url]]></Url>
+    <MsgId>1234567890123456</MsgId>
+    </xml>
+    """
+
+    def __init__(self, msg_dict):
+        super(LinkMsg, self).__init__(msg_dict)
+        self.Title = msg_dict.get("Title")
+        self.Description = msg_dict.get("Description")
+        self.Url = msg_dict.get("Url")
