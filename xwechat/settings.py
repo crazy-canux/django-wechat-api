@@ -28,7 +28,8 @@ SECRET_KEY = 'wfh*ff9ymrjv@v0nlfm7%pez3oi^p74d!m!o03g=ht2g#99v%m'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # SAE:on SAE not debug.
-DEBUG = not DEPLOY
+# DEBUG = not DEPLOY
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
