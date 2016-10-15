@@ -82,9 +82,9 @@ class WechatRequest(object):
         tmp_list.sort()
 
         # Wechat office method
-        sha1 = hashlib.sha1()
-        map(sha1.update, tmp_list)
-        hashcode = sha1.hexdigest()
+        # sha1 = hashlib.sha1()
+        # map(sha1.update, tmp_list)
+        # hashcode = sha1.hexdigest()
 
         # My own method
         tmp_str = '%s%s%s' % tuple(tmp_list)
