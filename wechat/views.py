@@ -10,9 +10,18 @@ from lxml import etree
 
 from receive_message import BasicReceive, TextMsg, ImageMsg
 from send_message import BasicSend, Text
-from image_how_old import image_how_old
+from how_old import handle_how_old
+from tuling_robot import handle_tuling_robot
 
 WECHAT_TOKEN = u"canux"
+
+# For Test account.
+APPID = u"wx9b5ba4f038cc97dc"
+APPSECRET = u"26064e6fdb53da5a84c29626a364a757"
+
+# For product account.
+# APPID = u"wxb30b6ef581cfd2c3"
+# APPSECRET = u"8053e1e3c22ac59edab35510d69d8e8c"
 
 # Send/response message types to wechat user.
 RESP_MESSAGE_TYPE_TEXT = u'text'
@@ -103,22 +112,22 @@ class WechatRequest(object):
         print(request_map)
         receive_basic_object = BasicReceive(request_map)
         MsgType = receive_basic_object.MsgType
-        print(MsgType)
         ToUserName = receive_basic_object.ToUserName
-        print(ToUserName)
         FromUserName = receive_basic_object.FromUserName
-        print(FromUserName)
+        # UserId for tuling robot
+        user_id = FromUserName[0:15]
 
         # Response to different request message type.
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
-            Content = receive_text_object.Content
-            send_text_object = Text(FromUserName, ToUserName, Content)
+            receive_content = receive_text_object.Content
+            send_content = handle_tuling_robot(receive_content, user_id)
+            send_text_object = Text(FromUserName, ToUserName, send_content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
             receive_image_object = ImageMsg(request_map)
             PicUrl = receive_image_object.PicUrl
-            Content = image_how_old(PicUrl)
+            Content = handle_how_old(PicUrl)
             send_text_object = Text(FromUserName, ToUserName, Content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_VOICE:

@@ -5,7 +5,7 @@ Use http://how-old.net to analyze the sex and age of the picture.
 
 Copyright (C) 2016 Canux CHENG.
 All rights reserved.
-Name: image_how_old.py
+Name: how_old.py
 Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
 Time: Mon 10 Oct 2016 12:45:48 AM EDT
@@ -45,7 +45,7 @@ def how_old(image_url):
     return datas
 
 
-def image_how_old(image_url):
+def handle_how_old(image_url):
     try:
         datas = how_old(image_url)
         resp_content = '图中人物性别为' + datas[0] + '\n' + '年龄为' + datas[1]
@@ -55,4 +55,4 @@ def image_how_old(image_url):
         return resp_content
 
 if __name__ == "__main__":
-    print image_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
+    print handle_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
