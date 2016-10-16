@@ -3,6 +3,6 @@
  <FromUserName><![CDATA[fromUser]]></FromUserName>
  <CreateTime>1348831860</CreateTime>
  <MsgType><![CDATA[text]]></MsgType>
- <Content><![CDATA[测试]]></Content>
+ <Content><![CDATA[今天上海天气怎么样]]></Content>
  <MsgId>1234567890123456</MsgId>
 </xml>

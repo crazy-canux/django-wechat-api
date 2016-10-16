@@ -19,7 +19,7 @@ DETAILS:
         {
             "key": "APIKEY",
             "info": "Your content",
-            "userid": "your id"
+            "userid": "wechat user openid, not support for booking account."
         }
 
     Receive from tuling:
@@ -65,16 +65,18 @@ APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
 SECRET = "6eaf872d2311e5ab"
 
 
-def tuling_robot(content, userid):
+def tuling_robot(content):
     s = requests.session()
-    post_data = {"key": APIKEY, "info": content, "userid": userid}
-    data = json.dumps(post_data)
+    data = {"key": APIKEY, "info": content}
+    data = json.dumps(data)
     response = s.post(API, data=data)
-    print(response)
-    resp_data = eval(response.text)
+    resp_data = json.loads(response.text)
+    # resp_data = eval(response.text)
     print(resp_data)
     code = resp_data['code']
+    text = resp_data['text']
     print(code)
+    print(text)
     if code == 100000:
         resp_content = resp_data['text']
     elif code == 200000:
@@ -88,9 +90,9 @@ def tuling_robot(content, userid):
     return resp_content
 
 
-def handle_tuling_robot(content, userid):
+def handle_tuling_robot(content):
     try:
-        resp_content = tuling_robot(content, userid)
+        resp_content = tuling_robot(content)
     except Exception:
         resp_content = "别瞎BB"
     finally:

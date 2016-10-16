@@ -62,11 +62,11 @@ def wechat_varify(request):
     if request.method == "GET":
         # Wechat server sent GET request to the URL to verify.
         print("Start to get")
-        return HttpResponse(WechatRequest.get_request(request))
+        return HttpResponse(WechatRequest.get_request(request), content_type="text/plain")
     elif request.method == "POST":
         # Wechat user POST the message to the URL with XML format.
         print("Start to post")
-        return HttpResponse(WechatRequest.post_request(request))
+        return HttpResponse(WechatRequest.post_request(request), content_type="application/xml")
     else:
         return None
 
@@ -104,24 +104,21 @@ class WechatRequest(object):
             return echostr
         else:
             print("get failed")
-            return ""
+            return None
 
     @staticmethod
     def post_request(request):
         request_map = MessageUtil.parse_xml(request)
-        print(request_map)
         receive_basic_object = BasicReceive(request_map)
         MsgType = receive_basic_object.MsgType
         ToUserName = receive_basic_object.ToUserName
         FromUserName = receive_basic_object.FromUserName
-        # UserId for tuling robot
-        user_id = FromUserName[0:15]
 
         # Response to different request message type.
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             receive_content = receive_text_object.Content
-            send_content = handle_tuling_robot(receive_content, user_id)
+            send_content = handle_tuling_robot(receive_content)
             send_text_object = Text(FromUserName, ToUserName, send_content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
