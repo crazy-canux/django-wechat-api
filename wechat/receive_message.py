@@ -40,7 +40,7 @@ class TextMsg(BasicReceive):
 
     def __init__(self, msg_dict):
         super(TextMsg, self).__init__(msg_dict)
-        self.Content = msg_dict.get("Content").encode('utf-8')
+        self.Content = msg_dict.get("Content")
 
 
 class ImageMsg(BasicReceive):

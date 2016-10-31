@@ -4,13 +4,23 @@ xwechat
 
 xwechat is a pure python project based on django.
 
-Deploy this project on Sina SAE platform.
-
 This project is for Wechat Official Accounts.
 
-xwechat/xwechat is the project folder.
+------
+wechat
+------
 
-xwechat/wechat is the Wechat Official Accounts xFullStack Interface.
+wechat is the application for wechat interface.
+
+`[Wechat-Interface] <https://mp.weixin.qq.com/wiki/home/>`_
+
+--------
+Sina-SAE
+--------
+
+Deploy this project on Sina SAE platform for test.
+
+`[Sina-SAE] <http://www.sinacloud.com/doc/sae/python/index.html>`_
 
 xwechat/site-packages is the third party libraries for SAE.
 
@@ -20,20 +30,35 @@ xwechat/index.wsgi is for SAE.
 
 xwechat/xwechat.sql is for SAE Mysql.
 
-======
-wechat
-======
-
-The interface for Wechat.
-
-==========
+----------
 xfullstack
-==========
+----------
 
-xFullStack is the Wechat Official Accounts.
+xFullStack is the test Wechat Official Accounts.
+
+.. figure:: /data/xfullstack.jpg
+   :alt: pic
 
 ====
 TODO
 ====
 
 1. Create menu.
+
+============
+Contribution
+============
+
+`Contribution <CONTRIBUTING.md>`__
+
+=======
+Authors
+=======
+
+`Authors <AUTHORS.md>`__
+
+=======
+License
+=======
+
+`License <LICENSE>`__

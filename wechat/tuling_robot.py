@@ -67,14 +67,13 @@ SECRET = "6eaf872d2311e5ab"
 
 def tuling_robot(content):
     s = requests.session()
-    data = {"key": APIKEY, "info": content}
+    data = {"key": APIKEY, "info": content.encode("utf-8")}
     data = json.dumps(data)
     response = s.post(API, data=data)
     resp_data = json.loads(response.text)
-    # resp_data = eval(response.text)
     print(resp_data)
     code = resp_data['code']
-    text = resp_data['text']
+    text = resp_data['text'].replace('<br>', '\n')
     print(code)
     print(text)
     if code == 100000:
