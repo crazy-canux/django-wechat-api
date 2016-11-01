@@ -1,5 +1,5 @@
 .. image::
-    https://img.shields.io/pypi/v/pydjangowechat.svg?style=plastic&label=version
+    https://img.shields.io/pypi/v/pydjangowechat.svg?style=plastic
    :target: https://pypi.python.org/pypi/pydjangowechat/
 
 .. image:: https://img.shields.io/pypi/dm/pydjangowechat.svg?style=plastic
@@ -72,7 +72,7 @@ xFullStack
 
 xFullStack is the test Wechat Official Accounts.
 
-.. figure:: /data/xfullstack.jpg
+.. figure:: https://github.com/crazy-canux/pydjangowechat/blob/master/data/xfullstack.jpg
    :alt: pic
 
 ====
