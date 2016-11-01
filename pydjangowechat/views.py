@@ -8,20 +8,11 @@ import hashlib
 # TPL
 from lxml import etree
 
+from django.conf import settings
 from receive_message import BasicReceive, TextMsg, ImageMsg
 from send_message import BasicSend, Text
 from how_old import handle_how_old
 from tuling_robot import handle_tuling_robot
-
-WECHAT_TOKEN = u"canux"
-
-# For Test account.
-APPID = u"wx9b5ba4f038cc97dc"
-APPSECRET = u"26064e6fdb53da5a84c29626a364a757"
-
-# For product account.
-# APPID = u"wxb30b6ef581cfd2c3"
-# APPSECRET = u"8053e1e3c22ac59edab35510d69d8e8c"
 
 # Send/response message types to wechat user.
 RESP_MESSAGE_TYPE_TEXT = u'text'
@@ -85,7 +76,7 @@ class WechatRequest(object):
         timestamp = request.GET.get("timestamp", None)
         nonce = request.GET.get("nonce", None)
         echostr = request.GET.get("echostr", None)
-        token = WECHAT_TOKEN
+        token = settings.WECHAT_TOKEN
 
         tmp_list = [token, timestamp, nonce]
         tmp_list.sort()

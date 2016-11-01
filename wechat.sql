@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.50, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: xwechat
+-- Host: localhost    Database: wechat
 -- ------------------------------------------------------
 -- Server version	5.5.50-0ubuntu0.14.04.1
 
@@ -53,8 +53,8 @@ CREATE TABLE `auth_group_permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id` (`group_id`,`permission_id`),
   KEY `auth_group__permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id` (`permission_id`),
-  CONSTRAINT `auth_group_permission_group_id_689710a9a73b7457_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
-  CONSTRAINT `auth_group__permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
+  CONSTRAINT `auth_group__permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permission_group_id_689710a9a73b7457_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,8 +170,8 @@ CREATE TABLE `auth_user_user_permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`,`permission_id`),
   KEY `auth_user_u_permission_id_384b62483d7071f0_fk_auth_permission_id` (`permission_id`),
-  CONSTRAINT `auth_user_user_permissi_user_id_7f0938558328534a_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `auth_user_u_permission_id_384b62483d7071f0_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
+  CONSTRAINT `auth_user_u_permission_id_384b62483d7071f0_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissi_user_id_7f0938558328534a_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -265,7 +265,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2016-10-10 02:45:01'),(2,'auth','0001_initial','2016-10-10 02:45:02'),(3,'admin','0001_initial','2016-10-10 02:45:02'),(4,'contenttypes','0002_remove_content_type_name','2016-10-10 02:45:02'),(5,'auth','0002_alter_permission_name_max_length','2016-10-10 02:45:02'),(6,'auth','0003_alter_user_email_max_length','2016-10-10 02:45:02'),(7,'auth','0004_alter_user_username_opts','2016-10-10 02:45:02'),(8,'auth','0005_alter_user_last_login_null','2016-10-10 02:45:02'),(9,'auth','0006_require_contenttypes_0002','2016-10-10 02:45:02'),(10,'sessions','0001_initial','2016-10-10 02:45:02');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2016-11-01 01:33:45'),(2,'auth','0001_initial','2016-11-01 01:33:45'),(3,'admin','0001_initial','2016-11-01 01:33:45'),(4,'contenttypes','0002_remove_content_type_name','2016-11-01 01:33:46'),(5,'auth','0002_alter_permission_name_max_length','2016-11-01 01:33:46'),(6,'auth','0003_alter_user_email_max_length','2016-11-01 01:33:46'),(7,'auth','0004_alter_user_username_opts','2016-11-01 01:33:46'),(8,'auth','0005_alter_user_last_login_null','2016-11-01 01:33:46'),(9,'auth','0006_require_contenttypes_0002','2016-11-01 01:33:46'),(10,'sessions','0001_initial','2016-11-01 01:33:46');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +291,6 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('th25los60xbueb88fe7mpfjruy912psu','NmQ0ZTEzZjQzYzI3NzBhY2QwYjYyNDJhMmI2MjZjNTMxM2FmOWMzNTp7fQ==','2016-10-24 02:45:45');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -304,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-11  2:00:40
+-- Dump completed on 2016-10-31 21:34:39
