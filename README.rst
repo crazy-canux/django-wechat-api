@@ -1,3 +1,6 @@
+.. image:: https://img.shields.io/pypi/v/nine.svg?style=plastic
+   :target: https://pypi.python.org/pypi/pydjangowechat/
+
 ==============
 pydjangowechat
 ==============
