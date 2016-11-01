@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/pypi/v/nine.svg?style=plastic
-   :target: https://pypi.python.org/pypi/pydjangowechat/
+   :target: https://pypi.python.org/pypi/pydjangowechat/1.0.0.0
 
 ==============
 pydjangowechat
