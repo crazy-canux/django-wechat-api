@@ -17,5 +17,5 @@ DESCRIPTION:
         Follow django document, pydjangowechat is a django application.
 """
 
-__version__ = "1.0.0.0"
+__version__ = "1.0.0.3"
 __author__ = "Canux CHENG"

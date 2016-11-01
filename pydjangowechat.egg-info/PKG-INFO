@@ -1,12 +1,19 @@
 Metadata-Version: 1.1
 Name: pydjangowechat
-Version: 1.0.0.0
+Version: 1.0.0.3
 Summary: Pure python/django for wechat official account interface.
 Home-page: https://github.com/crazy-canux/pydjangowechat
 Author: Canux CHENG
 Author-email: canuxcheng@gmail.com
 License: GPL
-Description: ==============
+Description: .. image::
+            https://img.shields.io/pypi/v/pydjangowechat.svg?style=plastic
+           :target: https://pypi.python.org/pypi/pydjangowechat/
+        
+        .. image:: https://img.shields.io/pypi/dm/pydjangowechat.svg?style=plastic
+           :target: https://pypi.python.org/pypi/pydjangowechat/
+        
+        ==============
         pydjangowechat
         ==============
         
@@ -73,7 +80,7 @@ Description: ==============
         
         xFullStack is the test Wechat Official Accounts.
         
-        .. figure:: /data/xfullstack.jpg
+        .. figure:: /data/images/xfullstack.jpg
            :alt: pic
         
         ====

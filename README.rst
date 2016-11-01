@@ -72,7 +72,7 @@ xFullStack
 
 xFullStack is the test Wechat Official Accounts.
 
-.. figure:: https://github.com/crazy-canux/pydjangowechat/blob/master/data/xfullstack.jpg
+.. figure:: /data/images/xfullstack.jpg
    :alt: pic
 
 ====
