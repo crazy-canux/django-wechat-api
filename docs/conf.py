@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'pydjangowechat'
-copyright = u'2016, Canux CHENG'
+copyright = u'2016, <a href="http://canuxcheng.com">Canux CHENG</a>'
 author = u'Canux CHENG'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -121,7 +121,13 @@ html_theme = 'alabaster'
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+    'github_user': 'crazy-canux',
+    'github_repo': 'pydeveloper',
+    'github_banner': True,
+    'show_powered_by': False,
+    'show_related': True,
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
