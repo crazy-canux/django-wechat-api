@@ -72,7 +72,7 @@ xFullStack
 
 xFullStack is the test Wechat Official Accounts.
 
-.. figure:: /data/images/xfullstack.jpg
+.. figure:: https://github.com/crazy-canux/pydjangowechat/blob/master/data/images/xfullstack.jpg
    :alt: pic
 
 ====
@@ -81,20 +81,26 @@ TODO
 
 1. Create menu.
 
+=============
+Documentation
+=============
+
+`[Documentation] <http://pydjangowechat.readthedocs.io/en/latest/`_
+
 ============
 Contribution
 ============
 
-`Contribution <CONTRIBUTING.md>`__
+`[Contribution] <https://github.com/crazy-canux/pydjangowechat/blob/master/CONTRIBUTING.rst>`_
 
 =======
 Authors
 =======
 
-`Authors <AUTHORS.md>`__
+`[Authors] <https://github.com/crazy-canux/pydjangowechat/blob/master/AUTHORS.rst>`_
 
 =======
 License
 =======
 
-`License <LICENSE>`__
+`[License] <https://github.com/crazy-canux/pydjangowechat/blob/master/LICENSE>`_

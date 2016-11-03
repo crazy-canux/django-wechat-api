@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: pydjangowechat
-Version: 1.0.0.3
+Version: 1.0.0.5
 Summary: Pure python/django for wechat official account interface.
 Home-page: https://github.com/crazy-canux/pydjangowechat
 Author: Canux CHENG
@@ -80,7 +80,7 @@ Description: .. image::
         
         xFullStack is the test Wechat Official Accounts.
         
-        .. figure:: /data/images/xfullstack.jpg
+        .. figure:: https://github.com/crazy-canux/pydjangowechat/blob/master/data/images/xfullstack.jpg
            :alt: pic
         
         ====
@@ -93,19 +93,19 @@ Description: .. image::
         Contribution
         ============
         
-        `Contribution <CONTRIBUTING.md>`__
+        `[Contribution] <https://github.com/crazy-canux/pydjangowechat/blob/master/CONTRIBUTING.rst>`_
         
         =======
         Authors
         =======
         
-        `Authors <AUTHORS.md>`__
+        `[Authors] <https://github.com/crazy-canux/pydjangowechat/blob/master/AUTHORS.rst>`_
         
         =======
         License
         =======
         
-        `License <LICENSE>`__
+        `[License] <https://github.com/crazy-canux/pydjangowechat/blob/master/LICENSE>`_
         
 Keywords: python django wechat
 Platform: any
@@ -113,6 +113,7 @@ Classifier: Development Status :: 5 - Production/Stable
 Classifier: Environment :: Web Environment
 Classifier: Framework :: Django :: 1.8
 Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
 Classifier: License :: OSI Approved :: GNU General Public License (GPL)
 Classifier: Operating System :: POSIX
 Classifier: Programming Language :: Python

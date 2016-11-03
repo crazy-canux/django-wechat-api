@@ -63,6 +63,7 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Django :: 1.8",
         "Intended Audience :: Developers",
+        "Natural Language :: English",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: POSIX",
         "Programming Language :: Python",
