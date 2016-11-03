@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^pydjangowechat/', include('pydjangowechat.urls', namespace='pydjangowechat'))
+    url(r'^pydjangowechat/', include('pydjangowechat.urls', namespace='pydjangowechat')),
+    url(r'^index/', include('pydjangowechat.urls', namespace='pydjangowechat'))
 ]

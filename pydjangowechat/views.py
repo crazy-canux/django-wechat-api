@@ -2,13 +2,13 @@
 # from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.conf import settings
 
 import hashlib
 
 # TPL
 from lxml import etree
 
-from django.conf import settings
 from receive_message import BasicReceive, TextMsg, ImageMsg
 from send_message import BasicSend, Text
 from how_old import handle_how_old

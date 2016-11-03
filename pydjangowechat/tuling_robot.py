@@ -55,21 +55,18 @@ DETAILS:
         302000: news
         308000: cookbok
 """
+from django.conf import settings
 import json
 
 # TPL
 import requests
 
-API = "http://www.tuling123.com/openapi/api"
-APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
-SECRET = "6eaf872d2311e5ab"
-
 
 def tuling_robot(content):
     s = requests.session()
-    data = {"key": APIKEY, "info": content.encode("utf-8")}
+    data = {"key": settings.TULING_APIKEY, "info": content.encode("utf-8")}
     data = json.dumps(data)
-    response = s.post(API, data=data)
+    response = s.post(settings.TULING_API, data=data)
     resp_data = json.loads(response.text)
     print(resp_data)
     code = resp_data['code']
@@ -98,4 +95,4 @@ def handle_tuling_robot(content):
         return resp_content
 
 if __name__ == "__main__":
-    print(handle_tuling_robot("天气", ""))
+    print(handle_tuling_robot("天气"))
