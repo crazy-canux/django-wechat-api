@@ -85,7 +85,7 @@ TODO
 Documentation
 =============
 
-`[Documentation] <http://pydjangowechat.readthedocs.io/en/latest/`_
+`[Documentation] <http://pydjangowechat.readthedocs.io/en/latest/>`_
 
 ============
 Contribution
