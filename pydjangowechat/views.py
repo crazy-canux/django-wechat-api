@@ -109,7 +109,8 @@ class WechatRequest(object):
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             receive_content = receive_text_object.Content
-            send_content = handle_tuling_robot(receive_content)
+            # send_content = handle_tuling_robot(receive_content)
+            send_content = str(type(request_map)) + str(type(receive_content))
             send_text_object = Text(FromUserName, ToUserName, send_content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
