@@ -109,7 +109,7 @@ class WechatRequest(object):
         if MsgType == REQ_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             receive_content = receive_text_object.Content
-            send_content = handle_tuling_robot(receive_content)
+            send_content = handle_tuling_robot(receive_content, FromUserName)
             # If return nothing from tuling robot.
             if not send_content:
                 send_content = u"不知道你在说啥，说点别的吧!"

@@ -101,11 +101,11 @@ def handle_tuling_robot(info, userid):
         resp_content = tuling_robot(info, userid)
     except Exception as e:
         # resp_content = "Debug: %s" % e
-        resp_content = None
+        resp_content = u''
     finally:
         return resp_content
 
 if __name__ == "__main__":
-    content = u"天气"
-    resp_content = handle_tuling_robot(content, '')
+    content = u"武汉"
+    resp_content = handle_tuling_robot(content, '1234')
     print("type: %s\ncontent: %s" % (type(resp_content), resp_content))
