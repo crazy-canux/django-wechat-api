@@ -89,8 +89,8 @@ def tuling_robot(content):
 def handle_tuling_robot(content):
     try:
         resp_content = tuling_robot(content)
-    except Exception:
-        resp_content = "别瞎BB"
+    except Exception as e:
+        resp_content = "Debug: %s" % e
     finally:
         return resp_content
 
