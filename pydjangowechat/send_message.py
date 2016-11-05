@@ -18,7 +18,7 @@ import time
 
 class BasicSend(object):
 
-    """If django server can not response in 5 seconds, must reply 'success' or NULL or wechat server have 3 times to retry.
+    """If django server can not response in 5 seconds, must reply 'success' or NULL and wechat server have 3 times to retry.
 
     So, If you don't want to reply this kinds of receive message, just reply 'success' to tell wechat server you already know.
     Or wechat will reply '该公众号暂时无法提供服务，请稍后再试' automatic.
