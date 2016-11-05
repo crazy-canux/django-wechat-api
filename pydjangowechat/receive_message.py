@@ -36,6 +36,9 @@ class TextMsg(BasicReceive):
     <Content><![CDATA[this is a test]]></Content>
     <MsgId>1234567890123456</MsgId>
     </xml>
+
+    @param self.Content
+    @type unicode
     """
 
     def __init__(self, msg_dict):

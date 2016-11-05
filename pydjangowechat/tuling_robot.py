@@ -56,8 +56,12 @@ DETAILS:
         302000: news
         308000: cookbok
 
-    Attention:
-        send utf-8 to tuling, but return unicode.
+    send utf-8 to tuling, and return unicode.
+    @param content
+    @type unicode
+
+    @param resp_content
+    @unicode
 """
 import json
 
@@ -99,4 +103,5 @@ def handle_tuling_robot(content):
         return resp_content
 
 if __name__ == "__main__":
+    print(type(handle_tuling_robot(u"天气")))
     print(handle_tuling_robot(u"天气"))
