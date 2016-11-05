@@ -65,9 +65,10 @@ import requests
 TULING_API = "http://www.tuling123.com/openapi/api"
 TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
 
+
 def tuling_robot(content):
     s = requests.session()
-    data = {"key": TULING_APIKEY, "info": content.decode("utf-8").encode("utf-8")}
+    data = {"key": TULING_APIKEY, "info": content.encode("utf-8")}
     data = json.dumps(data)
     response = s.post(TULING_API, data=data)
     resp_data = json.loads(response.text)
@@ -95,4 +96,4 @@ def handle_tuling_robot(content):
         return resp_content
 
 if __name__ == "__main__":
-    print(handle_tuling_robot("天气"))
+    print(handle_tuling_robot(u"天气"))
