@@ -143,8 +143,3 @@ WECHAT_APP_SECRET = "26064e6fdb53da5a84c29626a364a757"
 # For production account.
 # WECHAT_APP_ID = "wxb30b6ef581cfd2c3"
 # WECHAT_APP_SECRET = "8053e1e3c22ac59edab35510d69d8e8c"
-
-# Define tuling robot.
-TULING_API = "http://www.tuling123.com/openapi/api"
-TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
-TULING_SECRET = "6eaf872d2311e5ab"

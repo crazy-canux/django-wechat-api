@@ -14,6 +14,7 @@ DETAILS:
     http://www.tuling123.com
     Read the doc from tuling website.
     Use json format and HTTP POST to post data to tuling and return data with json format.
+    Close the secret function for tuling robot.
 
     Send to tuling:
         {
@@ -55,18 +56,20 @@ DETAILS:
         302000: news
         308000: cookbok
 """
-from django.conf import settings
 import json
 
 # TPL
 import requests
 
+# Define tuling API.
+TULING_API = "http://www.tuling123.com/openapi/api"
+TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
 
 def tuling_robot(content):
     s = requests.session()
-    data = {"key": settings.TULING_APIKEY, "info": content.encode("utf-8")}
+    data = {"key": TULING_APIKEY, "info": content.encode("utf-8")}
     data = json.dumps(data)
-    response = s.post(settings.TULING_API, data=data)
+    response = s.post(TULING_API, data=data)
     resp_data = json.loads(response.text)
     print(resp_data)
     code = resp_data['code']
@@ -82,17 +85,17 @@ def tuling_robot(content):
     elif code == 308000:
         resp_content = resp_data['text'] + resp_data['list'][0]['name'] + + resp_data['list'][0]['info'] + resp_data['list'][0]['detailurl']
     else:
-        resp_content = "听不懂鸟语，请说人话"
+        resp_content = u"听不懂鸟语，请说人话"
     return resp_content
 
 
 def handle_tuling_robot(content):
     try:
         resp_content = tuling_robot(content)
-    except Exception:
-        resp_content = "别瞎BB"
+    except Exception as e:
+        resp_content = u"别瞎BB"
     finally:
         return resp_content
 
 if __name__ == "__main__":
-    print(handle_tuling_robot("天气"))
+    print(handle_tuling_robot(u"天气"))
