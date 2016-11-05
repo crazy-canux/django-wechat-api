@@ -14,7 +14,13 @@ Time: Fri 14 Oct 2016 11:04:21 AM EDT
 
 class BasicReceive(object):
 
-    """Basic class for reveive message."""
+    """Basic class for reveive message.
+
+    @param ToUserName
+    @type str
+    @param FromUserName
+    @type str
+    """
 
     def __init__(self, msg_dict):
         self.ToUserName = msg_dict.get("ToUserName")
