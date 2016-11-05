@@ -110,13 +110,19 @@ class WechatRequest(object):
             receive_text_object = TextMsg(request_map)
             receive_content = receive_text_object.Content
             send_content = handle_tuling_robot(receive_content)
+            # If return nothing from tuling robot.
+            if not send_content:
+                send_content = u"不知道你在说啥，说点别的吧!"
             send_text_object = Text(FromUserName, ToUserName, send_content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
             receive_image_object = ImageMsg(request_map)
             PicUrl = receive_image_object.PicUrl
-            Content = handle_how_old(PicUrl)
-            send_text_object = Text(FromUserName, ToUserName, Content)
+            send_content = handle_how_old(PicUrl)
+            # If return nothing from how-old.net.
+            if not send_content:
+                send_content = u"只识别男女哦，不要发人妖!"
+            send_text_object = Text(FromUserName, ToUserName, send_content)
             return send_text_object.send()
         elif MsgType == REQ_MESSAGE_TYPE_VOICE:
             return BasicSend().send()

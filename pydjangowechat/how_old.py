@@ -53,12 +53,16 @@ def how_old(image_url):
 def handle_how_old(image_url):
     try:
         datas = how_old(image_url)
+        # print(datas)
         resp_content = u'图中人物性别为' + datas[0] + '\n' + u'年龄为' + datas[1]
     except Exception as e:
-        resp_content = 'Debug: %s' % e
+        # resp_content = 'Debug: %s' % e
+        resp_content = None
     finally:
         return resp_content
 
 if __name__ == "__main__":
-    resp_content = handle_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
+    # url = "http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg"
+    url = "http://pic.cnr.cn/pic/yc/20160810/W020160810375887124990.jpg"
+    resp_content = handle_how_old(url)
     print("type: %s\n content: %s" % (type(resp_content), resp_content))

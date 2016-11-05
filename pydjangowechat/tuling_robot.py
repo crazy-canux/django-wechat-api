@@ -20,7 +20,7 @@ DETAILS:
         {
             "key": "APIKEY",
             "info": "Your content",
-            "userid": "wechat user openid, not support for booking account."
+            "userid": "wechat user openid(FromUserName), not support for booking account."
         }
 
     Receive from tuling:
@@ -73,13 +73,15 @@ TULING_API = "http://www.tuling123.com/openapi/api"
 TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
 
 
-def tuling_robot(content):
+def tuling_robot(info, userid):
     s = requests.session()
-    data = {"key": TULING_APIKEY, "info": content.encode("utf-8")}
+    data = {"key": TULING_APIKEY, "info": info.encode("utf-8"), "userid": userid.encode("utf-8")}
     data = json.dumps(data)
     response = s.post(TULING_API, data=data)
     resp_data = json.loads(response.text)
+    # print("resp_data: %s" % resp_data)
     code = resp_data['code']
+    # print("code: %d" % code)
     # text = resp_data['text'].replace('<br>', '\n')
     if code == 100000:
         resp_content = resp_data['text']
@@ -94,14 +96,16 @@ def tuling_robot(content):
     return resp_content
 
 
-def handle_tuling_robot(content):
+def handle_tuling_robot(info, userid):
     try:
-        resp_content = tuling_robot(content)
+        resp_content = tuling_robot(info, userid)
     except Exception as e:
-        resp_content = "Debug: %s" % e
+        # resp_content = "Debug: %s" % e
+        resp_content = None
     finally:
         return resp_content
 
 if __name__ == "__main__":
-    print(type(handle_tuling_robot(u"天气")))
-    print(handle_tuling_robot(u"天气"))
+    content = u"天气"
+    resp_content = handle_tuling_robot(content, '')
+    print("type: %s\ncontent: %s" % (type(resp_content), resp_content))
