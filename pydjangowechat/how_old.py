@@ -12,6 +12,8 @@ Time: Mon 10 Oct 2016 12:45:48 AM EDT
 
 DETAILS:
     The image must be a human.
+    @param resp_content
+    @type unicode
 """
 import re
 
@@ -32,15 +34,18 @@ def how_old(image_url):
     }
     data = {"file": s.get(image_url).content}
     r = s.post(url, files=data, headers=header)
+    # print("r: %s\n\n\n" % r)
     h = r.content
+    # print("h: %s\n\n\n" % h)
     i = h.replace('\\', '')
+    # print("i: %s\n\n\n" % i)
 
     gender = re.search(r'"gender": "(.*?)"rn', i)
     age = re.search(r'"age": (.*?),rn', i)
     if gender.group(1) == "Male":
-        gender_zh = "男"
+        gender_zh = u"男"
     else:
-        gender_zh = "女"
+        gender_zh = u"女"
     datas = [gender_zh, age.group(1)]
     return datas
 
@@ -48,11 +53,12 @@ def how_old(image_url):
 def handle_how_old(image_url):
     try:
         datas = how_old(image_url)
-        resp_content = '图中人物性别为' + datas[0] + '\n' + '年龄为' + datas[1]
-    except Exception:
-        resp_content = '识别结果为人妖'
+        resp_content = u'图中人物性别为' + datas[0] + '\n' + u'年龄为' + datas[1]
+    except Exception as e:
+        resp_content = 'Debug: %s' % e
     finally:
         return resp_content
 
 if __name__ == "__main__":
-    print handle_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
+    resp_content = handle_how_old("http://pic.cnr.cn/pic/guoji/20161013/W020161013487678057091.jpg")
+    print("type: %s\n content: %s" % (type(resp_content), resp_content))

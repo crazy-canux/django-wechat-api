@@ -61,7 +61,7 @@ DETAILS:
     @type unicode
 
     @param resp_content
-    @unicode
+    @type unicode
 """
 import json
 
