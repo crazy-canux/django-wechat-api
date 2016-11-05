@@ -55,6 +55,9 @@ DETAILS:
         200000: link
         302000: news
         308000: cookbok
+
+    Attention:
+        send utf-8 to tuling, but return unicode.
 """
 import json
 

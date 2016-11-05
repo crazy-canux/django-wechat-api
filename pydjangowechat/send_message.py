@@ -40,7 +40,7 @@ class Text(BasicSend):
         self.__dict["ToUserName"] = ToUserName
         self.__dict["FromUserName"] = FromUserName
         self.__dict["CreateTime"] = int(time.time())
-        self.__dict["Content"] = Content
+        self.__dict["Content"] = Content.encode("utf-8")
 
     def send(self):
         xml_form = """
