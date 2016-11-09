@@ -1,0 +1,127 @@
+Metadata-Version: 1.1
+Name: django-wechat-api
+Version: 1.0.0.0
+Summary: Pure python/django for wechat official account interface.
+Home-page: https://github.com/crazy-canux/django-wechat-api
+Author: Canux CHENG
+Author-email: canuxcheng@gmail.com
+License: GPL
+Description: .. image::
+            https://img.shields.io/pypi/v/django-wechat-api.svg?style=plastic
+           :target: https://pypi.python.org/pypi/django-wechat-api/
+        
+        .. image:: https://img.shields.io/pypi/dm/django-wechat-api.svg?style=plastic
+           :target: https://pypi.python.org/pypi/django-wechat-api/
+        
+        =================
+        django-wechat-api
+        =================
+        
+        django-wechat-api is a pure python project based on django.
+        
+        This project is for Wechat Official Accounts API.
+        
+        `[Wechat-Interface] <https://mp.weixin.qq.com/wiki/home/>`_
+        
+        ==========
+        How to use
+        ==========
+        
+        Install django application django-wechat-api::
+        
+            pip install django-wechat-api
+        
+        Put your configuration in your django project in settings.py::
+        
+            INSTALLED_APPS = (
+            ...
+            'wechat_api'
+            )
+        
+            MYSQL_DB = 'wechat'
+            MYSQL_USER = 'django'
+            MYSQL_PASS = '******'
+            MYSQL_HOST = 'localhost'
+            MYSQL_PORT = '3306'
+        
+            WECHAT_TOKEN = u'your_token'
+            WECHAT_APP_ID = u'your_app_id'
+            WECHAT_APP_SECRET = u'your_app_secret'
+        
+        ====
+        Test
+        ====
+        
+        Create a django project "wechat" and wechat account "XXXZZZZ".
+        
+        Deploy this project on Sina SAE platform for test.
+        
+        django-wechat-api/wechat is the django project for test.
+        
+        ---
+        SAE
+        ---
+        
+        SAE is sina cloud platform.
+        
+        site-packages is the third party libraries for SAE.
+        
+        config.yaml is for SAE.
+        
+        index.wsgi is for SAE.
+        
+        wechat.sql is for SAE Mysql.
+        
+        `[Sina-SAE] <http://www.sinacloud.com/doc/sae/python/index.html>`_
+        
+        ------------------------
+        Wechat Official Accounts
+        ------------------------
+        
+        XXXZZZZ is the test Wechat Official Accounts.
+        
+        .. figure:: https://github.com/crazy-canux/django-wechat-api/blob/master/data/images/xxxzzzz.jpg
+           :alt: pic
+        
+        ====
+        TODO
+        ====
+        
+        1. Create menu.
+        
+        =============
+        Documentation
+        =============
+        
+        `[Documentation] <http://django-wechat-api.readthedocs.io/en/latest/>`_
+        
+        ============
+        Contribution
+        ============
+        
+        `[Contribution] <https://github.com/crazy-canux/django-wechat-api/blob/master/CONTRIBUTING.rst>`_
+        
+        =======
+        Authors
+        =======
+        
+        `[Authors] <https://github.com/crazy-canux/django-wechat-api/blob/master/AUTHORS.rst>`_
+        
+        =======
+        License
+        =======
+        
+        `[License] <https://github.com/crazy-canux/django-wechat-api/blob/master/LICENSE>`_
+        
+Keywords: python django wechat
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django :: 1.8
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

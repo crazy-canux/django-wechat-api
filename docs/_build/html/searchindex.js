@@ -1,1 +1,1 @@
-Search.setIndex({envversion:46,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{content:0,index:0,modul:0,page:0,search:0},titles:["Welcome to pydjangowechat&#8217;s documentation!"],titleterms:{document:0,indic:0,pydjangowechat:0,tabl:0,welcom:0}})
+Search.setIndex({envversion:46,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{content:0,index:0,modul:0,page:0,search:0},titles:["Welcome to django-wechat-api&#8217;s documentation!"],titleterms:{api:0,django:0,document:0,indic:0,tabl:0,wechat:0,welcom:0}})

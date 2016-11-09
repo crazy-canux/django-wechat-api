@@ -1,15 +1,15 @@
 .. image::
-    https://img.shields.io/pypi/v/pydjangowechat.svg?style=plastic
-   :target: https://pypi.python.org/pypi/pydjangowechat/
+    https://img.shields.io/pypi/v/django-wechat-api.svg?style=plastic
+   :target: https://pypi.python.org/pypi/django-wechat-api/
 
-.. image:: https://img.shields.io/pypi/dm/pydjangowechat.svg?style=plastic
-   :target: https://pypi.python.org/pypi/pydjangowechat/
+.. image:: https://img.shields.io/pypi/dm/django-wechat-api.svg?style=plastic
+   :target: https://pypi.python.org/pypi/django-wechat-api/
 
-==============
-pydjangowechat
-==============
+=================
+django-wechat-api
+=================
 
-pydjangowechat is a pure python project based on django.
+django-wechat-api is a pure python project based on django.
 
 This project is for Wechat Official Accounts API.
 
@@ -19,15 +19,15 @@ This project is for Wechat Official Accounts API.
 How to use
 ==========
 
-Install django application pydjangowechat::
+Install django application django-wechat-api::
 
-    pip install pydjangowechat
+    pip install django-wechat-api
 
 Put your configuration in your django project in settings.py::
 
     INSTALLED_APPS = (
     ...
-    'pydjangowechat'
+    'wechat_api'
     )
 
     MYSQL_DB = 'wechat'
@@ -44,11 +44,11 @@ Put your configuration in your django project in settings.py::
 Test
 ====
 
-Create a django project "wechat" and wechat account "xFullStack".
+Create a django project "wechat" and wechat account "XXXZZZZ".
 
 Deploy this project on Sina SAE platform for test.
 
-pydjangowechat/wechat is the django project for test.
+django-wechat-api/wechat is the django project for test.
 
 ---
 SAE
@@ -56,23 +56,23 @@ SAE
 
 SAE is sina cloud platform.
 
-pydjangowechat/site-packages is the third party libraries for SAE.
+site-packages is the third party libraries for SAE.
 
-pydjangowechat/config.yaml is for SAE.
+config.yaml is for SAE.
 
-pydjangowechat/index.wsgi is for SAE.
+index.wsgi is for SAE.
 
-pydjangowechat/wechat.sql is for SAE Mysql.
+wechat.sql is for SAE Mysql.
 
 `[Sina-SAE] <http://www.sinacloud.com/doc/sae/python/index.html>`_
 
-----------
-xFullStack
-----------
+------------------------
+Wechat Official Accounts
+------------------------
 
-xFullStack is the test Wechat Official Accounts.
+XXXZZZZ is the test Wechat Official Accounts.
 
-.. figure:: https://github.com/crazy-canux/pydjangowechat/blob/master/data/images/xfullstack.jpg
+.. figure:: https://github.com/crazy-canux/django-wechat-api/blob/master/data/images/xxxzzzz.jpg
    :alt: pic
 
 ====
@@ -85,22 +85,22 @@ TODO
 Documentation
 =============
 
-`[Documentation] <http://pydjangowechat.readthedocs.io/en/latest/>`_
+`[Documentation] <http://django-wechat-api.readthedocs.io/en/latest/>`_
 
 ============
 Contribution
 ============
 
-`[Contribution] <https://github.com/crazy-canux/pydjangowechat/blob/master/CONTRIBUTING.rst>`_
+`[Contribution] <https://github.com/crazy-canux/django-wechat-api/blob/master/CONTRIBUTING.rst>`_
 
 =======
 Authors
 =======
 
-`[Authors] <https://github.com/crazy-canux/pydjangowechat/blob/master/AUTHORS.rst>`_
+`[Authors] <https://github.com/crazy-canux/django-wechat-api/blob/master/AUTHORS.rst>`_
 
 =======
 License
 =======
 
-`[License] <https://github.com/crazy-canux/pydjangowechat/blob/master/LICENSE>`_
+`[License] <https://github.com/crazy-canux/django-wechat-api/blob/master/LICENSE>`_

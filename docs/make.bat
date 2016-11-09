@@ -127,9 +127,9 @@ if "%1" == "qthelp" (
 	echo.
 	echo.Build finished; now you can run "qcollectiongenerator" with the ^
 .qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\pydjangowechat.qhcp
+	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\django-wechat-api.qhcp
 	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\pydjangowechat.ghc
+	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\django-wechat-api.ghc
 	goto end
 )
 

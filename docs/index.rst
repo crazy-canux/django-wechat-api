@@ -1,10 +1,10 @@
-.. pydjangowechat documentation master file, created by
-   sphinx-quickstart on Thu Nov  3 01:23:15 2016.
+.. django-wechat-api documentation master file, created by
+   sphinx-quickstart on Tue Nov  8 22:04:13 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pydjangowechat's documentation!
-==========================================
+Welcome to django-wechat-api's documentation!
+=============================================
 
 Contents:
 
