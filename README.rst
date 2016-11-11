@@ -73,17 +73,33 @@ Deploy this project on Sina SAE platform for test.
 SAE
 ---
 
-SAE is sina cloud platform.
+SAE is sina cloud application engine.
 
 site-packages is the third party libraries for SAE.
 
-config.yaml is for SAE.
+config.yaml is for SAE configuration.
 
-index.wsgi is for SAE.
+index.wsgi is for SAE entry.
 
 wechat.sql is for SAE Mysql.
 
 `[Sina-SAE] <http://www.sinacloud.com/doc/sae/python/index.html>`_
+
+---
+BAE
+---
+
+BAE is baidu cloud application engine.
+
+app.conf is for BAE configuration.
+
+index.py is for BAE entry.
+
+favicon.ico is for BAE favicon.
+
+wechat.sql is for BAE Mysql.
+
+`[Baidu-BAE] <https://cloud.baidu.com/doc/BAE/Python.html#.E6.A6.82.E8.BF.B0>`_
 
 ------------------------
 Wechat Official Accounts

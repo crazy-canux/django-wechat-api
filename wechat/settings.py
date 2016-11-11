@@ -15,7 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SAE:True means on SAE, False means on local.
+# SAE/BAE:True means on server, False means on local.
 DEPLOY = 'SERVER_SOFTWARE' in os.environ
 
 
@@ -27,7 +27,7 @@ SECRET_KEY = 'wfh*ff9ymrjv@v0nlfm7%pez3oi^p74d!m!o03g=ht2g#99v%m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-# SAE:on SAE not debug.
+# SAE/BAE:on server not debug.
 DEBUG = not DEPLOY
 
 ALLOWED_HOSTS = ['*']
@@ -80,15 +80,23 @@ WSGI_APPLICATION = 'wechat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
 # SAE
 # For SAE
+# if DEPLOY:
+#    import sae.const
+#    MYSQL_DB = sae.const.MYSQL_DB
+#    MYSQL_USER = sae.const.MYSQL_USER
+#    MYSQL_PASS = sae.const.MYSQL_PASS
+#    MYSQL_HOST = sae.const.MYSQL_HOST
+#    MYSQL_PORT = sae.const.MYSQL_PORT
+# For BAE
 if DEPLOY:
-    import sae.const
-    MYSQL_DB = sae.const.MYSQL_DB
-    MYSQL_USER = sae.const.MYSQL_USER
-    MYSQL_PASS = sae.const.MYSQL_PASS
-    MYSQL_HOST = sae.const.MYSQL_HOST
-    MYSQL_PORT = sae.const.MYSQL_PORT
+    MYSQL_DB = 'yZPwHsciFPfWvrfRnpZJ'
+    MYSQL_USER = '2ccb65f718624644a1168657a2d52958'
+    MYSQL_PASS = 'f28ab5e79d854148a7a1ae877a55e908'
+    MYSQL_HOST = 'sqld.duapp.com'
+    MYSQL_PORT = '4050'
 # For Local
 else:
     MYSQL_DB = 'wechat'
