@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
+u"""
 When got text message from wechat user, reply with tuling robot.
 
 Copyright (C) 2016 Canux CHENG.
@@ -10,7 +10,9 @@ Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
 Time: Sun 16 Oct 2016 01:53:46 AM EDT
 
-DETAILS:
+DESCRIPTION:
+    图灵机器人接口。
+
     http://www.tuling123.com
     Read the doc from tuling website.
     Use json format and HTTP POST to post data to tuling and return data with json format.
@@ -56,12 +58,6 @@ DETAILS:
         302000: news
         308000: cookbok
 
-    send utf-8 to tuling, and return unicode.
-    @param content
-    @type unicode
-
-    @param resp_content
-    @type unicode
 """
 import json
 
@@ -74,6 +70,16 @@ TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
 
 
 def tuling_robot(info, userid):
+    """Send message and userid to tuling and get response.
+
+    send utf-8 to tuling, and return unicode.
+
+    @param info
+    @type unicode
+
+    @param resp_content
+    @type unicode
+    """
     s = requests.session()
     data = {"key": TULING_APIKEY, "info": info.encode("utf-8"), "userid": userid.encode("utf-8")}
     data = json.dumps(data)

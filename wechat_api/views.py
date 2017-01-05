@@ -10,11 +10,29 @@ import hashlib
 from lxml import etree
 
 from receive_message import BasicReceive, TextMsg, ImageMsg
-from send_message import BasicSend, Text
+from response_message import BasicResponse, Text
 from how_old import handle_how_old
 from tuling_robot import handle_tuling_robot
 
-# Send/response message types to wechat user.
+# Receive message type from wechat user.
+REC_MESSAGE_TYPE_TEXT = u'text'
+REC_MESSAGE_TYPE_IMAGE = u'image'
+REC_MESSAGE_TYPE_VOICE = u'voice'
+REC_MESSAGE_TYPE_VIDEO = u'video'
+REC_MESSAGE_TYPE_SHORTVIDEO = u'shortvideo'
+REC_MESSAGE_TYPE_LOCATION = u'location'
+REC_MESSAGE_TYPE_LINK = u'link'
+REC_MESSAGE_TYPE_EVENT = u'event'
+
+# Event type from wechat user.
+EVENT_SUBSCRIBE = u'subscribe'
+EVENT_UNSUBSCRIBE = u'unsubscribe'
+EVENT_SCAN = u'SCAN'
+EVENT_LOCATION = u'LOCATION'
+EVENT_CLICK = u'CLICK'
+EVENT_VIEW = u'VIEW'
+
+# Response message types to wechat user.
 RESP_MESSAGE_TYPE_TEXT = u'text'
 RESP_MESSAGE_TYPE_IMAGE = u'image'
 RESP_MESSAGE_TYPE_VOICE = u'voice'
@@ -23,24 +41,6 @@ RESP_MESSAGE_TYPE_MUSIC = u'music'
 RESP_MESSAGE_TYPE_NEWS = u'news'
 MESSAGE_TYPE = [u'text', u'image', u'voice', u'video', u'music', u'news']
 
-# Receive/request message type from wechat user.
-REQ_MESSAGE_TYPE_TEXT = u'text'
-REQ_MESSAGE_TYPE_IMAGE = u'image'
-REQ_MESSAGE_TYPE_VOICE = u'voice'
-REQ_MESSAGE_TYPE_VIDEO = u'video'
-REQ_MESSAGE_TYPE_SHORTVIDEO = u'shortvideo'
-REQ_MESSAGE_TYPE_LOCATION = u'location'
-REQ_MESSAGE_TYPE_LINK = u'link'
-REQ_MESSAGE_TYPE_EVENT = u'event'
-
-# Event type from wechat user.
-Event_SUBSCRIBE = u'subscribe'
-Event_UNSUBSCRIBE = u'unsubscribe'
-Event_SCAN = u'SCAN'
-Event_LOCATION = u'LOCATION'
-Event_CLICK = u'CLICK'
-Event_VIEW = u'VIEW'
-
 
 @csrf_exempt
 def wechat_varify(request):
@@ -48,7 +48,7 @@ def wechat_varify(request):
 
     GET means wechat server make connection with django server.
     POST means wechat user send message to wechat server and transfer to django server,
-    And django server send message back to wechat server and transfer to wechat user.
+    And django server response message back to wechat server and transfer to wechat user.
     """
     if request.method == "GET":
         # Wechat server sent GET request to the URL to verify.
@@ -72,6 +72,12 @@ class WechatRequest(object):
 
     @staticmethod
     def get_request(request):
+        u"""Wechat server use http GET to make connect with django server.
+
+        将token、timestamp、nonce三个参数进行字典序排序
+        将三个参数字符串拼接成一个字符串进行sha1加密
+        开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
+        """
         signature = request.GET.get("signature", None)
         timestamp = request.GET.get("timestamp", None)
         nonce = request.GET.get("nonce", None)
@@ -99,6 +105,11 @@ class WechatRequest(object):
 
     @staticmethod
     def post_request(request):
+        """When get message or event from wechat user(wechat server), django server response something.
+
+        This is just reply the message and event.
+        Not django server use http to post message to wechat server(wechat user).
+        """
         request_map = MessageUtil.parse_xml(request)
         receive_basic_object = BasicReceive(request_map)
         MsgType = receive_basic_object.MsgType
@@ -106,52 +117,53 @@ class WechatRequest(object):
         FromUserName = receive_basic_object.FromUserName
 
         # Response to different request message type.
-        if MsgType == REQ_MESSAGE_TYPE_TEXT:
+        if MsgType == REC_MESSAGE_TYPE_TEXT:
             receive_text_object = TextMsg(request_map)
             receive_content = receive_text_object.Content
-            send_content = handle_tuling_robot(receive_content, FromUserName)
+            response_content = handle_tuling_robot(receive_content, FromUserName)
             # If return nothing from tuling robot.
-            if not send_content:
-                send_content = u"不知道你在说啥，说点别的吧!"
-            send_text_object = Text(FromUserName, ToUserName, send_content)
-            return send_text_object.send()
-        elif MsgType == REQ_MESSAGE_TYPE_IMAGE:
+            if not response_content:
+                response_content = u"不知道你在说啥，说点别的吧!"
+            response_text_object = Text(FromUserName, ToUserName, response_content)
+            return response_text_object.response()
+        elif MsgType == REC_MESSAGE_TYPE_IMAGE:
             receive_image_object = ImageMsg(request_map)
             PicUrl = receive_image_object.PicUrl
-            send_content = handle_how_old(PicUrl)
+            response_content = handle_how_old(PicUrl)
             # If return nothing from how-old.net.
-            if not send_content:
-                send_content = u"只识别男女哦，不要发人妖!"
-            send_text_object = Text(FromUserName, ToUserName, send_content)
-            return send_text_object.send()
-        elif MsgType == REQ_MESSAGE_TYPE_VOICE:
-            return BasicSend().send()
-        elif MsgType == REQ_MESSAGE_TYPE_VIDEO:
-            return BasicSend().send()
-        elif MsgType == REQ_MESSAGE_TYPE_SHORTVIDEO:
-            return BasicSend().send()
-        elif MsgType == REQ_MESSAGE_TYPE_LOCATION:
-            return BasicSend().send()
-        elif MsgType == REQ_MESSAGE_TYPE_LINK:
-            return BasicSend().send()
-        elif MsgType == REQ_MESSAGE_TYPE_EVENT:
+            if not response_content:
+                response_content = u"只识别男女哦，不要发人妖!"
+            response_text_object = Text(FromUserName, ToUserName, response_content)
+            return response_text_object.response()
+        elif MsgType == REC_MESSAGE_TYPE_VOICE:
+            return BasicResponse().response()
+        elif MsgType == REC_MESSAGE_TYPE_VIDEO:
+            return BasicResponse().response()
+        elif MsgType == REC_MESSAGE_TYPE_SHORTVIDEO:
+            return BasicResponse().response()
+        elif MsgType == REC_MESSAGE_TYPE_LOCATION:
+            return BasicResponse().response()
+        elif MsgType == REC_MESSAGE_TYPE_LINK:
+            return BasicResponse().response()
+        elif MsgType == REC_MESSAGE_TYPE_EVENT:
+            return BasicResponse().response()
             Event = request_map.get(u'Event')
-            if Event == Event_SUBSCRIBE:
-                return BasicSend().send()
-            elif Event == Event_UNSUBSCRIBE:
-                return BasicSend().send()
-            elif Event == Event_SCAN:
-                return BasicSend().send()
-            elif Event == Event_LOCATION:
-                return BasicSend().send()
-            elif Event == Event_CLICK:
-                return BasicSend().send()
-            elif Event == Event_VIEW:
-                return BasicSend().send()
+            if Event == EVENT_SUBSCRIBE:
+                return BasicResponse().response()
+            elif Event == EVENT_UNSUBSCRIBE:
+                return BasicResponse().response()
+            elif Event == EVENT_SCAN:
+                return BasicResponse().response()
+            elif Event == EVENT_LOCATION:
+                return BasicResponse().response()
+            elif Event == EVENT_CLICK:
+                return BasicResponse().response()
+            elif Event == EVENT_VIEW:
+                return BasicResponse().response()
             else:
-                return BasicSend().send()
+                return BasicResponse().response()
         else:
-            return BasicSend().send()
+            return BasicResponse().response()
 
 
 class MessageUtil(object):

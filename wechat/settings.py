@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wechat_api',
+    'enterprise_api',
+    'application_api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -143,11 +145,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Define wechat configurations.
+# Define token for wechat official account.
 WECHAT_TOKEN = "canux"
-# For Test account.
-WECHAT_APP_ID = "wx9b5ba4f038cc97dc"
-WECHAT_APP_SECRET = "26064e6fdb53da5a84c29626a364a757"
-# For production account.
-# WECHAT_APP_ID = "wxb30b6ef581cfd2c3"
-# WECHAT_APP_SECRET = "8053e1e3c22ac59edab35510d69d8e8c"

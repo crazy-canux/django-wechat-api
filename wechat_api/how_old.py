@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
+u"""
 Use http://how-old.net to analyze the sex and age of the picture.
 
 Copyright (C) 2016 Canux CHENG.
@@ -10,10 +10,8 @@ Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
 Time: Mon 10 Oct 2016 12:45:48 AM EDT
 
-DETAILS:
-    The image must be a human.
-    @param resp_content
-    @type unicode
+DESCRIPTION:
+    使用MicroSoft的how-old.net网站获取图片中人物的性别和年龄。
 """
 import re
 
@@ -22,7 +20,12 @@ import requests
 
 
 def how_old(image_url):
-    """Get the sex and age from how-old.net."""
+    """Get the sex and age from how-old.net.
+
+    The image must be a human.
+    @param resp_content
+    @type unicode
+    """
     s = requests.session()
     url = "http://how-old.net/Home/Analyze?isTest=False&source=&version=001"
     header = {

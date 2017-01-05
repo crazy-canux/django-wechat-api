@@ -21,6 +21,7 @@ class BasicReceive(object):
 
     @param ToUserName
     @type str
+
     @param FromUserName
     @type str
     """
@@ -143,7 +144,7 @@ class ShortVideoMsg(BasicReceive):
 
 class LocationMsg(BasicReceive):
 
-    """Basic class for receive location message.
+    u"""Basic class for receive location message.
 
     <xml>
     <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -168,7 +169,7 @@ class LocationMsg(BasicReceive):
 
 class LinkMsg(BasicReceive):
 
-    """Basic class for receive link message.
+    u"""Basic class for receive link message.
 
     <xml>
     <ToUserName><![CDATA[toUser]]></ToUserName>

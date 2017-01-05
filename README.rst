@@ -116,7 +116,9 @@ Canux is the test Wechat Official Enterprise Account.
 TODO
 ====
 
-1. Create menu.
+1. wechat_api develop send_message.py
+2. wechat_api develop receive_event.py
+3. enterprise_api develop receive_event.py
 
 =============
 Documentation
