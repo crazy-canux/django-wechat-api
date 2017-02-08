@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="django-wechat-api 1.0.0.0 documentation" href="#" />
+    <link rel="next" title="wechat" href="wechat.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -39,9 +40,53 @@
             
   <div class="section" id="django-wechat-api">
 <h1>django-wechat-api<a class="headerlink" href="#django-wechat-api" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+<p>This project is the python/django API for wechat official account development.</p>
+<p>wechat is the django project used for test django applications.</p>
+<p>wechat_api is a django application for wechat subscribe and service account.</p>
+<p>enterprise_api is a django application for wechat enterprise account.</p>
+<p>application_api is a django application for wechat application account.</p>
+</div>
+<div class="section" id="how-to-install">
+<h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
+<p>Install the django application:</p>
+<div class="highlight-python"><div class="highlight"><pre>$pip install django-wechat-api
+</pre></div>
+</div>
+<p>Create a django project for example named wechat.</p>
+<p>And put this configuration in the project wechat:</p>
+<div class="highlight-python"><div class="highlight"><pre>INSTALLED_APPS = (
+...
+&#39;wechat_api&#39;,
+&#39;enterprise_api&#39;,
+&#39;application_api&#39;
+)
+
+MYSQL_DB = &#39;wechat&#39;
+MYSQL_USER = &#39;django&#39;
+MYSQL_PASS = &#39;******&#39;
+MYSQL_HOST = &#39;localhost&#39;
+MYSQL_PORT = &#39;3306&#39;
+
+# For subscribe and service account.
+WECHAT_TOKEN = u&#39;your_token&#39;
+WECHAT_APP_ID = u&#39;your_app_id&#39;
+WECHAT_APP_SECRET = u&#39;your_app_secret&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-use">
+<h1>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h1>
+<p>Register the wechat official account for test.</p>
+<p>And deploy the code on BAE, SAE or BAE.</p>
+</div>
+<div class="section" id="the-user-guid">
+<h1>The User Guid<a class="headerlink" href="#the-user-guid" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wechat.html">wechat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wechat_api.html">wechat_api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enterprise_api.html">enterprise_api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application_api.html">application_api</a></li>
 </ul>
 </div>
 </div>
@@ -63,12 +108,16 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">django-wechat-api</a></li>
+<li><a class="reference internal" href="#how-to-install">How to install</a></li>
+<li><a class="reference internal" href="#how-to-use">How to use</a></li>
+<li><a class="reference internal" href="#the-user-guid">The User Guid</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="wechat.html" title="next chapter">wechat</a></li>
   </ul></li>
 </ul>
 </div>

@@ -5,15 +5,15 @@
 .. image:: https://img.shields.io/pypi/dm/django-wechat-api.svg?style=plastic
    :target: https://pypi.python.org/pypi/django-wechat-api/
 
-=======
-Project
-=======
+==============
+Django Project
+==============
 
 wechat is a django project created for test wechat API applications.
 
-===========
-Application
-===========
+==================
+Django Application
+==================
 
 - wechat_api
 
