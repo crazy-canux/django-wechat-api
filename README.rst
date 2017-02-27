@@ -37,9 +37,13 @@ Django Application
 How to use
 ==========
 
-Install django application django-wechat-api::
+Create django project wechat::
 
-    pip install django-wechat-api
+    $django-admin startproject wechat
+
+Install django application django-wechat-api in your django project::
+
+    $pip install django-wechat-api
 
 Put your configuration in your django project in settings.py::
 
@@ -64,8 +68,6 @@ Put your configuration in your django project in settings.py::
 ====
 Test
 ====
-
-Create a django project "wechat" to test.
 
 Deploy this project on Sina SAE platform for test.
 
@@ -111,14 +113,6 @@ XXXZZZZ is the test Wechat Official Subscribe Account.
    :alt: pic
 
 Canux is the test Wechat Official Enterprise Account.
-
-====
-TODO
-====
-
-1. wechat_api develop send_message.py
-2. wechat_api develop receive_event.py
-3. enterprise_api develop receive_event.py
 
 =============
 Documentation

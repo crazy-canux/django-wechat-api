@@ -42,6 +42,56 @@
   <div class="section" id="wechat">
 <span id="id1"></span><h1>wechat<a class="headerlink" href="#wechat" title="Permalink to this headline">¶</a></h1>
 <p>wechat is a django project created for test wechat API applications.</p>
+<p>Include:</p>
+<p><a class="reference external" href="https://mp.weixin.qq.com/wiki/home/">[Wechat subscribe&amp;service Interface]</a></p>
+<p><a class="reference external" href="http://qydev.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5">[Enterprise Interface]</a></p>
+<p><a class="reference external" href="https://mp.weixin.qq.com/debug/wxadoc/dev/index.html">[Application Interface]</a></p>
+<p>And some other functions:</p>
+<ul class="simple">
+<li>Use <a class="reference external" href="http://how-old.net">http://how-old.net</a> to anylyze the age of a picture.</li>
+<li>Use <a class="reference external" href="http://www.tuling123.com">http://www.tuling123.com</a> to auto response message.</li>
+</ul>
+</div>
+<div class="section" id="how-to-use">
+<h1>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic" start="0">
+<li><p class="first">Register your wechat official account.</p>
+</li>
+<li><p class="first">Create django project wechat:</p>
+<div class="highlight-python"><div class="highlight"><pre>$django-admin startproject wechat
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install this django application:</p>
+<div class="highlight-python"><div class="highlight"><pre>$pip install django-wechat-api
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configuration the django project in settings.py:</p>
+<div class="highlight-python"><div class="highlight"><pre>INSTALLED_APPS = (
+...
+# Just choose which you need
+&#39;wechat_api&#39;,
+&#39;enterprise_api&#39;,
+&#39;application_api&#39;
+)
+
+MYSQL_DB = &#39;wechat&#39;
+MYSQL_USER = &#39;django&#39;
+MYSQL_PASS = &#39;******&#39;
+MYSQL_HOST = &#39;localhost&#39;
+MYSQL_PORT = &#39;3306&#39;
+
+# For subscribe and service account.
+WECHAT_TOKEN = u&#39;your_token&#39;
+WECHAT_APP_ID = u&#39;your_app_id&#39;
+WECHAT_APP_SECRET = u&#39;your_app_secret&#39;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Deploy your project on SAE or BAE to test.</p>
+</li>
+</ol>
 </div>
 
 
@@ -49,7 +99,13 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">wechat</a></li>
+<li><a class="reference internal" href="#how-to-use">How to use</a></li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>

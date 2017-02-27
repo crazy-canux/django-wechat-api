@@ -48,7 +48,7 @@ MESSAGE_TYPE = [u'text', u'image', u'voice', u'video', u'news']
 
 @csrf_exempt
 def wechat_varify(request):
-    """Basic function used to conmunicate with wechat.
+    """Basic function used to communicate with wechat.
 
     GET means wechat server make connection with django server.
     POST means wechat user send message to wechat server and transfer to django server,
