@@ -123,7 +123,7 @@ class WechatRequest(object):
             response_content = handle_tuling_robot(receive_content, FromUserName)
             # If return nothing from tuling robot.
             if not response_content:
-                response_content = u"不知道你在说啥，说点别的吧!"
+                response_content = u"只识别人话哦，别说鸟语!"
             response_text_object = Text(FromUserName, ToUserName, response_content)
             return response_text_object.response()
         elif MsgType == REC_MESSAGE_TYPE_IMAGE:

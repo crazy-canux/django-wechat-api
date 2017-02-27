@@ -13,7 +13,8 @@ Release:
 
 Todo:
 
-- response message
+- response text message with tuling123.com
+- response image message with how-old.net
 - send message
 - receive event format
 - response event message
