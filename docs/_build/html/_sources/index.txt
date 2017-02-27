@@ -16,41 +16,7 @@ enterprise_api is a django application for wechat enterprise account.
 
 application_api is a django application for wechat application account.
 
-How to install
-==============
 
-Install the django application::
-
-    $pip install django-wechat-api
-
-Create a django project for example named wechat.
-
-And put this configuration in the project wechat::
-
-    INSTALLED_APPS = (
-    ...
-    'wechat_api',
-    'enterprise_api',
-    'application_api'
-    )
-
-    MYSQL_DB = 'wechat'
-    MYSQL_USER = 'django'
-    MYSQL_PASS = '******'
-    MYSQL_HOST = 'localhost'
-    MYSQL_PORT = '3306'
-
-    # For subscribe and service account.
-    WECHAT_TOKEN = u'your_token'
-    WECHAT_APP_ID = u'your_app_id'
-    WECHAT_APP_SECRET = u'your_app_secret'
-
-How to use
-==========
-
-Register the wechat official account for test.
-
-And deploy the code on BAE, SAE or BAE.
 
 The User Guid
 =============

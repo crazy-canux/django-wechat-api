@@ -69,7 +69,7 @@ Put your configuration in your django project in settings.py::
 Test
 ====
 
-Deploy this project on Sina SAE platform for test.
+Deploy this project on SAE/BAE/GAE platform for test.
 
 ---
 SAE

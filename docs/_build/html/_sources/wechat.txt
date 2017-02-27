@@ -25,7 +25,7 @@ And some other functions:
 
 
 How to use
-==========
+----------
 
 0. Register your wechat official account.
 
