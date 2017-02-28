@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'wechat_api',
     'enterprise_api',
-    'application_api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,26 +82,25 @@ WSGI_APPLICATION = 'wechat.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 
-# SAE
 # For SAE
-# if DEPLOY:
-#    import sae.const
-#    MYSQL_DB = sae.const.MYSQL_DB
-#    MYSQL_USER = sae.const.MYSQL_USER
-#    MYSQL_PASS = sae.const.MYSQL_PASS
-#    MYSQL_HOST = sae.const.MYSQL_HOST
-#    MYSQL_PORT = sae.const.MYSQL_PORT
-# For BAE
 if DEPLOY:
-    MYSQL_DB = 'yZPwHsciFPfWvrfRnpZJ'
-    MYSQL_USER = '2ccb65f718624644a1168657a2d52958'
-    MYSQL_PASS = 'f28ab5e79d854148a7a1ae877a55e908'
-    MYSQL_HOST = 'sqld.duapp.com'
-    MYSQL_PORT = '4050'
+    import sae.const
+    MYSQL_DB = sae.const.MYSQL_DB
+    MYSQL_USER = sae.const.MYSQL_USER
+    MYSQL_PASS = sae.const.MYSQL_PASS
+    MYSQL_HOST = sae.const.MYSQL_HOST
+    MYSQL_PORT = sae.const.MYSQL_PORT
+# For BAE
+#if DEPLOY:
+#    MYSQL_DB = 'yZPwHsciFPfWvrfRnpZJ'
+#    MYSQL_USER = '2ccb65f718624644a1168657a2d52958'
+#    MYSQL_PASS = 'f28ab5e79d854148a7a1ae877a55e908'
+#    MYSQL_HOST = 'sqld.duapp.com'
+#    MYSQL_PORT = '4050'
 # For Local
 else:
     MYSQL_DB = 'wechat'
-    MYSQL_USER = 'django'
+    MYSQL_USER = 'chengca'
     MYSQL_PASS = 'chengca'
     MYSQL_HOST = 'localhost'
     MYSQL_PORT = '3306'
@@ -145,5 +143,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Define token for wechat official account.
+# Define token for wechat subscribe and service account.
 WECHAT_TOKEN = "canux"

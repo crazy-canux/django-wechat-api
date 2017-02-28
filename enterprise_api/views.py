@@ -56,11 +56,9 @@ def wechat_varify(request):
     """
     if request.method == "GET":
         # Wechat server sent GET request to the URL to verify.
-        print("Start to get")
         return HttpResponse(WechatRequest.get_request(request), content_type="text/plain")
     elif request.method == "POST":
         # Wechat user POST the message to the URL with XML format.
-        print("Start to post")
         return HttpResponse(WechatRequest.post_request(request), content_type="application/xml")
     else:
         return None
@@ -76,7 +74,7 @@ class WechatRequest(object):
 
     @staticmethod
     def get_request(request):
-        signature = request.GET.get("signature", None)
+        msg_signature = request.GET.get("msg_signature", None)
         timestamp = request.GET.get("timestamp", None)
         nonce = request.GET.get("nonce", None)
         echostr = request.GET.get("echostr", None)
@@ -94,11 +92,9 @@ class WechatRequest(object):
         # tmp_str = '%s%s%s' % tuple(tmp_list)
         # hashcode = hashlib.sha1(tmp_str).hexdigest()
 
-        if hashcode == signature:
-            print("get succeed")
+        if hashcode == msg_signature:
             return echostr
         else:
-            print("get failed")
             return None
 
     @staticmethod

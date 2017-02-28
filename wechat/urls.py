@@ -20,5 +20,4 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^wechat/', include('wechat_api.urls', namespace='wechat_api')),
     url(r'^enterprise/', include('enterprise_api.urls', namespace='enterprise_api')),
-    url(r'^application/', include('application_api.urls', namespace='application_api')),
 ]
