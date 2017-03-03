@@ -7,6 +7,7 @@ import sae
 #import sys
 #root = os.path.dirname(__file__)
 #sys.path.insert(0, os.path.join(root, "site-packages"))
+sae.add_vender_dir("site-packages")
 
 from wechat import wsgi
 
