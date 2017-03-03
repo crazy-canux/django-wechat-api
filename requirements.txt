@@ -1,14 +1,5 @@
 Django==1.8.2
+requests==2.11.1
 lxml==3.3.3
 MySQL-python==1.2.3
-requests==2.11.1
-appdirs==1.4.0
-packaging==16.8
-pbr==1.10.0
 pycrypto==2.6.1
-pyparsing==2.1.10
-six==1.10.0
-stevedore==1.20.0
-virtualenv==15.1.0
-virtualenv-clone==0.2.6
-virtualenvwrapper==4.7.2
