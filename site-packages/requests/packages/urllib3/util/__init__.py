@@ -24,10 +24,6 @@ from .url import (
     split_first,
     Url,
 )
-from .wait import (
-    wait_for_read,
-    wait_for_write
-)
 
 __all__ = (
     'HAS_SNI',
@@ -47,6 +43,4 @@ __all__ = (
     'resolve_ssl_version',
     'split_first',
     'ssl_wrap_socket',
-    'wait_for_read',
-    'wait_for_write'
 )

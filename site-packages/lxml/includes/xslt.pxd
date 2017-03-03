@@ -1,5 +1,4 @@
 from lxml.includes.tree cimport xmlDoc, xmlNode, xmlDict, xmlChar, const_xmlChar
-from lxml.includes.xmlerror cimport xmlGenericErrorFunc
 from lxml.includes.xpath cimport xmlXPathContext, xmlXPathFunction
 
 from libc.string cimport const_char
@@ -97,14 +96,12 @@ cdef extern from "libxslt/transform.h":
                                    xsltTemplate* templ,
                                    xsltStackElem* params) nogil
 
-
 cdef extern from "libxslt/xsltutils.h":
     cdef int xsltSaveResultToString(xmlChar** doc_txt_ptr,
                                     int* doc_txt_len,
                                     xmlDoc* result,
                                     xsltStylesheet* style) nogil
-    cdef xmlGenericErrorFunc xsltGenericError
-    cdef void *xsltGenericErrorContext
+    
     cdef void xsltSetGenericErrorFunc(
         void* ctxt, void (*handler)(void* ctxt, char* msg, ...)) nogil
     cdef void xsltSetTransformErrorFunc(
@@ -115,7 +112,6 @@ cdef extern from "libxslt/xsltutils.h":
                                  xmlNode* node, char* msg, ...)
     cdef void xsltSetCtxtParseOptions(
         xsltTransformContext* ctxt, int options)
-
 
 cdef extern from "libxslt/security.h":
     ctypedef struct xsltSecurityPrefs

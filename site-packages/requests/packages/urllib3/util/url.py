@@ -10,19 +10,14 @@ url_attrs = ['scheme', 'auth', 'host', 'port', 'path', 'query', 'fragment']
 class Url(namedtuple('Url', url_attrs)):
     """
     Datastructure for representing an HTTP URL. Used as a return value for
-    :func:`parse_url`. Both the scheme and host are normalized as they are
-    both case-insensitive according to RFC 3986.
+    :func:`parse_url`.
     """
-    __slots__ = ()
+    slots = ()
 
     def __new__(cls, scheme=None, auth=None, host=None, port=None, path=None,
                 query=None, fragment=None):
         if path and not path.startswith('/'):
             path = '/' + path
-        if scheme:
-            scheme = scheme.lower()
-        if host:
-            host = host.lower()
         return super(Url, cls).__new__(cls, scheme, auth, host, port, path,
                                        query, fragment)
 
@@ -189,14 +184,10 @@ def parse_url(url):
             host = _host
 
         if port:
-            # If given, ports must be integers. No whitespace, no plus or
-            # minus prefixes, no non-integer digits such as ^2 (superscript).
+            # If given, ports must be integers.
             if not port.isdigit():
                 raise LocationParseError(url)
-            try:
-                port = int(port)
-            except ValueError:
-                raise LocationParseError(url)
+            port = int(port)
         else:
             # Blank ports are cool, too. (rfc3986#section-3.2.3)
             port = None
@@ -220,7 +211,7 @@ def parse_url(url):
 
 def get_host(url):
     """
-    Deprecated. Use :func:`parse_url` instead.
+    Deprecated. Use :func:`.parse_url` instead.
     """
     p = parse_url(url)
     return p.scheme or 'http', p.hostname, p.port

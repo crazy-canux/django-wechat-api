@@ -11,6 +11,7 @@ from ..exceptions import SSLError, InsecurePlatformWarning, SNIMissingWarning
 
 SSLContext = None
 HAS_SNI = False
+create_default_context = None
 IS_PYOPENSSL = False
 
 # Maps the length of a digest to a possible hash function producing this digest
@@ -62,25 +63,14 @@ except ImportError:
 # The general intent is:
 # - Prefer cipher suites that offer perfect forward secrecy (DHE/ECDHE),
 # - prefer ECDHE over DHE for better performance,
-# - prefer any AES-GCM and ChaCha20 over any AES-CBC for better performance and
-#   security,
-# - prefer AES-GCM over ChaCha20 because hardware-accelerated AES is common,
+# - prefer any AES-GCM over any AES-CBC for better performance and security,
+# - use 3DES as fallback which is secure but slow,
 # - disable NULL authentication, MD5 MACs and DSS for security reasons.
-DEFAULT_CIPHERS = ':'.join([
-    'ECDH+AESGCM',
-    'ECDH+CHACHA20',
-    'DH+AESGCM',
-    'DH+CHACHA20',
-    'ECDH+AES256',
-    'DH+AES256',
-    'ECDH+AES128',
-    'DH+AES',
-    'RSA+AESGCM',
-    'RSA+AES',
-    '!aNULL',
-    '!eNULL',
-    '!MD5',
-])
+DEFAULT_CIPHERS = (
+    'ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+HIGH:'
+    'DH+HIGH:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+HIGH:RSA+3DES:!aNULL:'
+    '!eNULL:!MD5'
+)
 
 try:
     from ssl import SSLContext  # Modern SSL?
@@ -127,8 +117,8 @@ except ImportError:
                 'urllib3 from configuring SSL appropriately and may cause '
                 'certain SSL connections to fail. You can upgrade to a newer '
                 'version of Python to solve this. For more information, see '
-                'https://urllib3.readthedocs.io/en/latest/advanced-usage.html'
-                '#ssl-warnings',
+                'https://urllib3.readthedocs.io/en/latest/security.html'
+                '#insecureplatformwarning.',
                 InsecurePlatformWarning
             )
             kwargs = {
@@ -297,9 +287,6 @@ def ssl_wrap_socket(sock, keyfile=None, certfile=None, cert_reqs=None,
     """
     context = ssl_context
     if context is None:
-        # Note: This branch of code and all the variables in it are no longer
-        # used by urllib3 itself. We should consider deprecating and removing
-        # this code.
         context = create_urllib3_context(ssl_version, cert_reqs,
                                          ciphers=ciphers)
 
@@ -314,9 +301,6 @@ def ssl_wrap_socket(sock, keyfile=None, certfile=None, cert_reqs=None,
             if e.errno == errno.ENOENT:
                 raise SSLError(e)
             raise
-    elif getattr(context, 'load_default_certs', None) is not None:
-        # try to load OS default certs; works well on Windows (require Python3.4+)
-        context.load_default_certs()
 
     if certfile:
         context.load_cert_chain(certfile, keyfile)
@@ -329,8 +313,8 @@ def ssl_wrap_socket(sock, keyfile=None, certfile=None, cert_reqs=None,
         'This may cause the server to present an incorrect TLS '
         'certificate, which can cause validation failures. You can upgrade to '
         'a newer version of Python to solve this. For more information, see '
-        'https://urllib3.readthedocs.io/en/latest/advanced-usage.html'
-        '#ssl-warnings',
+        'https://urllib3.readthedocs.io/en/latest/security.html'
+        '#snimissingwarning.',
         SNIMissingWarning
     )
     return context.wrap_socket(sock)

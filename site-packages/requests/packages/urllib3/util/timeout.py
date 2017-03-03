@@ -11,8 +11,11 @@ from ..exceptions import TimeoutStateError
 _Default = object()
 
 
-# Use time.monotonic if available.
-current_time = getattr(time, "monotonic", time.time)
+def current_time():
+    """
+    Retrieve the current time. This function is mocked out in unit testing.
+    """
+    return time.time()
 
 
 class Timeout(object):
@@ -108,8 +111,8 @@ class Timeout(object):
         :param name: The name of the timeout attribute to validate. This is
             used to specify in error messages.
         :return: The validated and casted version of the given value.
-        :raises ValueError: If it is a numeric value less than or equal to
-            zero, or the type is not an integer, float, or None.
+        :raises ValueError: If the type is not an integer or a float, or if it
+            is a numeric value less than zero.
         """
         if value is _Default:
             return cls.DEFAULT_TIMEOUT
@@ -117,23 +120,20 @@ class Timeout(object):
         if value is None or value is cls.DEFAULT_TIMEOUT:
             return value
 
-        if isinstance(value, bool):
-            raise ValueError("Timeout cannot be a boolean value. It must "
-                             "be an int, float or None.")
         try:
             float(value)
         except (TypeError, ValueError):
             raise ValueError("Timeout value %s was %s, but it must be an "
-                             "int, float or None." % (name, value))
+                             "int or float." % (name, value))
 
         try:
-            if value <= 0:
+            if value < 0:
                 raise ValueError("Attempted to set %s timeout to %s, but the "
                                  "timeout cannot be set to a value less "
-                                 "than or equal to 0." % (name, value))
+                                 "than 0." % (name, value))
         except TypeError:  # Python 3
             raise ValueError("Timeout value %s was %s, but it must be an "
-                             "int, float or None." % (name, value))
+                             "int or float." % (name, value))
 
         return value
 

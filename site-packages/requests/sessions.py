@@ -17,8 +17,7 @@ from .cookies import (
     cookiejar_from_dict, extract_cookies_to_jar, RequestsCookieJar, merge_cookies)
 from .models import Request, PreparedRequest, DEFAULT_REDIRECT_LIMIT
 from .hooks import default_hooks, dispatch_hook
-from ._internal_utils import to_native_string
-from .utils import to_key_val_list, default_headers
+from .utils import to_key_val_list, default_headers, to_native_string
 from .exceptions import (
     TooManyRedirects, InvalidSchema, ChunkedEncodingError, ContentDecodingError)
 from .packages.urllib3._collections import RecentlyUsedContainer
@@ -28,7 +27,7 @@ from .adapters import HTTPAdapter
 
 from .utils import (
     requote_uri, get_environ_proxies, get_netrc_auth, should_bypass_proxies,
-    get_auth_from_url, rewind_body
+    get_auth_from_url
 )
 
 from .status_codes import codes
@@ -157,24 +156,12 @@ class SessionRedirectMixin(object):
             # in the new request. Because we've mutated our copied prepared
             # request, use the old one that we haven't yet touched.
             extract_cookies_to_jar(prepared_request._cookies, req, resp.raw)
-            merge_cookies(prepared_request._cookies, self.cookies)
+            prepared_request._cookies.update(self.cookies)
             prepared_request.prepare_cookies(prepared_request._cookies)
 
             # Rebuild auth and proxy information.
             proxies = self.rebuild_proxies(prepared_request, proxies)
             self.rebuild_auth(prepared_request, resp)
-
-            # A failed tell() sets `_body_position` to `object()`. This non-None
-            # value ensures `rewindable` will be True, allowing us to raise an
-            # UnrewindableBodyError, instead of hanging the connection.
-            rewindable = (
-                prepared_request._body_position is not None and
-                ('Content-Length' in headers or 'Transfer-Encoding' in headers)
-            )
-
-            # Attempt to rewind consumed file-like object.
-            if rewindable:
-                rewind_body(prepared_request)
 
             # Override the original request.
             req = prepared_request
@@ -239,7 +226,7 @@ class SessionRedirectMixin(object):
         if self.trust_env and not should_bypass_proxies(url):
             environ_proxies = get_environ_proxies(url)
 
-            proxy = environ_proxies.get(scheme, environ_proxies.get('all'))
+            proxy = environ_proxies.get('all', environ_proxies.get(scheme))
 
             if proxy:
                 new_proxies.setdefault(scheme, proxy)
@@ -335,7 +322,7 @@ class Session(SessionRedirectMixin):
         #: SSL Verification default.
         self.verify = True
 
-        #: SSL client certificate default.
+        #: SSL certificate default.
         self.cert = None
 
         #: Maximum number of redirects allowed. If the request exceeds this

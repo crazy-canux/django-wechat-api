@@ -5,11 +5,14 @@ Issue #10, see: http://code.google.com/p/urllib3/issues/detail?id=10
 """
 from __future__ import absolute_import
 
+try:
+    from http.client import HTTPSConnection
+except ImportError:
+    from httplib import HTTPSConnection
 from logging import getLogger
 from ntlm import ntlm
 
-from .. import HTTPSConnectionPool
-from ..packages.six.moves.http_client import HTTPSConnection
+from urllib3 import HTTPSConnectionPool
 
 
 log = getLogger(__name__)
