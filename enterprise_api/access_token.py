@@ -52,15 +52,14 @@ DESCRIPTION:
         {"errcode":40013,"errmsg":"invalid appid"}
 """
 from django.conf import settings
-settings.configure()
 
 import json
 
 # TPL
 import requests
 
-ENTERPRISE_CORPID = "wx2b60193d11c71526"
-ENTERPRISE_SECRET = "Ox9khNJ72tR-I6TnRLUnmdYvzIatUjruTXCD-uhjRux0sBBKCXA1XeGeJ-jF7LKy"
+ENTERPRISE_CORPID = settings.CORPID
+ENTERPRISE_SECRET = settings.SECRET
 
 
 class AccessToken(object):

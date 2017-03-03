@@ -42,6 +42,28 @@
   <div class="section" id="enterprise-api">
 <span id="id1"></span><h1>enterprise_api<a class="headerlink" href="#enterprise-api" title="Permalink to this headline">¶</a></h1>
 <p>This django application is the API for wechat enterprise account.</p>
+<p>微信企业号有两种调用模式：</p>
+<ul class="simple">
+<li>主动调用(可用于主动给用户发送消息)</li>
+<li>回调模式(类似于订阅号和服务号的被动响应用户发送的消息和事件)</li>
+</ul>
+<p>已实现的功能：</p>
+<ul class="simple">
+<li>回调模式接收用户发送的文本消息，用图灵机器人回复．</li>
+<li>回调模式接收用户发送的图片消息，用微软的how-old回复性别和年龄．</li>
+</ul>
+<p>待实现的功能：</p>
+<ul class="simple">
+<li>回调模式接收用户发送的其它类型消息并回复．</li>
+<li>回调模式接收用户发送的事件并回复．</li>
+<li>主动调用模式给用户推送消息．</li>
+</ul>
+<p>暂不实现的功能：</p>
+<ul class="simple">
+<li>认证接口</li>
+<li>资源接口</li>
+<li>其它能力接口的高级功能</li>
+</ul>
 <p>Release:</p>
 <ul class="simple">
 <li>receive message format</li>

@@ -53,9 +53,7 @@
 </ul>
 <div class="section" id="how-to-use">
 <h2>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic" start="0">
-<li><p class="first">Register your wechat official account.</p>
-</li>
+<ol class="arabic">
 <li><p class="first">Create django project wechat:</p>
 <div class="highlight-python"><div class="highlight"><pre>$django-admin startproject wechat
 </pre></div>
@@ -75,20 +73,67 @@
 &#39;application_api&#39;
 )
 
-MYSQL_DB = &#39;wechat&#39;
-MYSQL_USER = &#39;django&#39;
-MYSQL_PASS = &#39;******&#39;
-MYSQL_HOST = &#39;localhost&#39;
-MYSQL_PORT = &#39;3306&#39;
+# SAE/BAE:True means on server, False means on local.
+DEPLOY = &#39;SERVER_SOFTWARE&#39; in os.environ
 
-# For subscribe and service account.
+# For SAE
+if DEPLOY:
+    import sae.const
+    MYSQL_DB = sae.const.MYSQL_DB
+    MYSQL_USER = sae.const.MYSQL_USER
+    MYSQL_PASS = sae.const.MYSQL_PASS
+    MYSQL_HOST = sae.const.MYSQL_HOST
+    MYSQL_PORT = sae.const.MYSQL_PORT
+# For BAE
+#if DEPLOY:
+#    MYSQL_DB = &#39;******&#39;
+#    MYSQL_USER = &#39;******&#39;
+#    MYSQL_PASS = &#39;******&#39;
+#    MYSQL_HOST = &#39;sqld.duapp.com&#39;
+#    MYSQL_PORT = &#39;4050&#39;
+# For Local
+else:
+     MYSQL_DB = &#39;wechat&#39;
+     MYSQL_USER = &#39;******&#39;
+     MYSQL_PASS = &#39;******&#39;
+     MYSQL_HOST = &#39;localhost&#39;
+     MYSQL_PORT = &#39;3306&#39;
+
+# For wechat subscribe and service account.
 WECHAT_TOKEN = u&#39;your_token&#39;
 WECHAT_APP_ID = u&#39;your_app_id&#39;
 WECHAT_APP_SECRET = u&#39;your_app_secret&#39;
+
+# For wechat enterprise account.
+CORPID = &quot;your_corp_id&quot;
+TOKEN = &quot;your_token&quot;
+EncodingAESKey = &quot;your_encoding_aeskey&quot;
+SECRET = &quot;your_secret&quot;
+AGENTID = &quot;your_application_id&quot;
+SAFE = 0/1
 </pre></div>
 </div>
 </li>
-<li><p class="first">Deploy your project on SAE or BAE to test.</p>
+<li><p class="first">Configuration the django project in urls.py:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^wechat/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;wechat_api.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">&#39;wechat_api&#39;</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^enterprise/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;enterprise_api.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">&#39;enterprise_api&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Deploy your project on SAE or BAE to test:</p>
+<div class="highlight-python"><div class="highlight"><pre># Export data from local mysql and import to SAE/BAE
+$mysqldump -u &lt;username&gt; -p &lt;databasename&gt; &gt; &lt;filename&gt;.sql
+</pre></div>
+</div>
+</li>
+<li><p class="first">Register your wechat official account and fill in your SAE/BAE url and your tocken:</p>
+<div class="highlight-python"><div class="highlight"><pre>URL(SAE): http://&lt;project&gt;.applinzi.com/&lt;wechat/enterprise&gt;/
+URL(BAE): http://&lt;project&gt;.duapp.com/&lt;wechat/enterprise&gt;/
+TOKEN: yourtoken
+</pre></div>
+</div>
 </li>
 </ol>
 </div>

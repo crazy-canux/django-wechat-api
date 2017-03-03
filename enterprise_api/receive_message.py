@@ -11,20 +11,13 @@ Version: V1.0.0.0
 Time: Fri 14 Oct 2016 11:04:21 AM EDT
 
 DESCRIPTION:
-    wechat用户通过http的post发送的消息类型。
+    wechat用户通过http的post发送给企业服务器的经过解密后的消息类型格式。
 """
 
 
 class BasicReceive(object):
 
-    """Basic class for reveive message.
-
-    @param ToUserName
-    @type str
-
-    @param FromUserName
-    @type str
-    """
+    """Basic class for reveive message."""
 
     def __init__(self, msg_dict):
         self.ToUserName = msg_dict.get("ToUserName")
@@ -32,6 +25,7 @@ class BasicReceive(object):
         self.CreateTime = msg_dict.get("CreateTime")
         self.MsgType = msg_dict.get("MsgType")
         self.MsgId = msg_dict.get("MsgId")
+        self.AgentID = msg_dict.get("AgentID")
 
 
 class TextMsg(BasicReceive):
@@ -45,6 +39,7 @@ class TextMsg(BasicReceive):
     <MsgType><![CDATA[text]]></MsgType>
     <Content><![CDATA[this is a text]]></Content>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
 
     @param self.Content
@@ -68,6 +63,7 @@ class ImageMsg(BasicReceive):
     <PicUrl><![CDATA[this is a url]]></PicUrl>
     <MediaId><![CDATA[media_id]]></MediaId>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 
@@ -90,6 +86,7 @@ class VoiceMsg(BasicReceive):
     <Format><![CDATA[Format]]></Format>
     <Recognition><![CDATA[腾讯微信团队]]></Recognition>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 
@@ -112,6 +109,7 @@ class VideoMsg(BasicReceive):
     <MediaId><![CDATA[media_id]]></MediaId>
     <ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 
@@ -133,6 +131,7 @@ class ShortVideoMsg(BasicReceive):
     <MediaId><![CDATA[media_id]]></MediaId>
     <ThumbMediaId><![CDATA[thumb_media_id]]></ThumbMediaId>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 
@@ -156,6 +155,7 @@ class LocationMsg(BasicReceive):
     <Scale>20</Scale>
     <Label><![CDATA[位置信息]]></Label>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 
@@ -180,6 +180,7 @@ class LinkMsg(BasicReceive):
     <Description><![CDATA[公众平台官网链接]]></Description>
     <Url><![CDATA[url]]></Url>
     <MsgId>1234567890123456</MsgId>
+    <AgentID>1</AgentID>
     </xml>
     """
 

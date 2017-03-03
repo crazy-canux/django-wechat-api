@@ -27,8 +27,6 @@ And some other functions:
 How to use
 ----------
 
-0. Register your wechat official account.
-
 1. Create django project wechat::
 
     $django-admin startproject wechat
@@ -47,15 +45,59 @@ How to use
     'application_api'
     )
 
-    MYSQL_DB = 'wechat'
-    MYSQL_USER = 'django'
-    MYSQL_PASS = '******'
-    MYSQL_HOST = 'localhost'
-    MYSQL_PORT = '3306'
+    # SAE/BAE:True means on server, False means on local.
+    DEPLOY = 'SERVER_SOFTWARE' in os.environ
 
-    # For subscribe and service account.
+    # For SAE
+    if DEPLOY:
+        import sae.const
+        MYSQL_DB = sae.const.MYSQL_DB
+        MYSQL_USER = sae.const.MYSQL_USER
+        MYSQL_PASS = sae.const.MYSQL_PASS
+        MYSQL_HOST = sae.const.MYSQL_HOST
+        MYSQL_PORT = sae.const.MYSQL_PORT
+    # For BAE
+    #if DEPLOY:
+    #    MYSQL_DB = '******'
+    #    MYSQL_USER = '******'
+    #    MYSQL_PASS = '******'
+    #    MYSQL_HOST = 'sqld.duapp.com'
+    #    MYSQL_PORT = '4050'
+    # For Local
+    else:
+         MYSQL_DB = 'wechat'
+         MYSQL_USER = '******'
+         MYSQL_PASS = '******'
+         MYSQL_HOST = 'localhost'
+         MYSQL_PORT = '3306'
+
+    # For wechat subscribe and service account.
     WECHAT_TOKEN = u'your_token'
     WECHAT_APP_ID = u'your_app_id'
     WECHAT_APP_SECRET = u'your_app_secret'
 
-4. Deploy your project on SAE or BAE to test.
+    # For wechat enterprise account.
+    CORPID = "your_corp_id"
+    TOKEN = "your_token"
+    EncodingAESKey = "your_encoding_aeskey"
+    SECRET = "your_secret"
+    AGENTID = "your_application_id"
+    SAFE = 0/1
+
+4. Configuration the django project in urls.py::
+
+    urlpatterns = [
+        url(r'^wechat/', include('wechat_api.urls', namespace='wechat_api')),
+        url(r'^enterprise/', include('enterprise_api.urls', namespace='enterprise_api')),
+    ]
+
+5. Deploy your project on SAE or BAE to test::
+
+    # Export data from local mysql and import to SAE/BAE
+    $mysqldump -u <username> -p <databasename> > <filename>.sql
+
+6. Register your wechat official account and fill in your SAE/BAE url and your tocken::
+
+    URL(SAE): http://<project>.applinzi.com/<wechat/enterprise>/
+    URL(BAE): http://<project>.duapp.com/<wechat/enterprise>/
+    TOKEN: yourtoken

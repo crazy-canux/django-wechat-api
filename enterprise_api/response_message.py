@@ -12,22 +12,23 @@ Time: Tue 11 Oct 2016 12:22:40 AM EDT
 
 DESCRIPTION:
     当收到用户发送的消息或事件，django后台对此进行回复的消息类型。
+    需要加密后回复给用户．
 """
 import time
 
 
 class BasicResponse(object):
 
-    u"""If django server can not response in 5 seconds, must reply 'success' or NULL and wechat server have 3 times to retry.
+    u"""If django server can not response in 5 seconds, will disconnect and have 3 times to retry.
 
-    如果django后台不能及时响应，需要回复"success"或者空字符串，否则wechat服务器会发送"该公众号暂时无法提供服务，请稍后再试"给用户。
+    假如企业无法保证在五秒内处理并回复，可以直接回复空串，企业号不会对此作任何处理，并且不会发起重试。
     """
 
     def __init__(self):
         pass
 
     def response(self):
-        return "success"
+        return ""
 
 
 class Text(BasicResponse):

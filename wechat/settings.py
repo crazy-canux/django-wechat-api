@@ -143,5 +143,15 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Define token for wechat subscribe and service account.
+# For wechat subscribe and service account
 WECHAT_TOKEN = "canux"
+WECHAT_APP_ID = ""
+WECHAT_APP_SECRET = ""
+
+# For wechat enterprise account
+CORPID = "wx2b60193d11c71526"
+TOKEN = "canux"
+EncodingAESKey = "6L6XDzj7GGdRSDTET6J4FMklM5FZKM8gKc76hlaplSl"
+SECRET = "Ox9khNJ72tR-I6TnRLUnmdYvzIatUjruTXCD-uhjRux0sBBKCXA1XeGeJ-jF7LKy"
+AGENTID = 1
+SAFE = 0

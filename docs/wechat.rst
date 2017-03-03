@@ -58,16 +58,16 @@ How to use
         MYSQL_PORT = sae.const.MYSQL_PORT
     # For BAE
     #if DEPLOY:
-    #    MYSQL_DB = 'yZPwHsciFPfWvrfRnpZJ'
-    #    MYSQL_USER = '2ccb65f718624644a1168657a2d52958'
-    #    MYSQL_PASS = 'f28ab5e79d854148a7a1ae877a55e908'
+    #    MYSQL_DB = '******'
+    #    MYSQL_USER = '******'
+    #    MYSQL_PASS = '******'
     #    MYSQL_HOST = 'sqld.duapp.com'
     #    MYSQL_PORT = '4050'
     # For Local
     else:
          MYSQL_DB = 'wechat'
-         MYSQL_USER = 'django'
-         MYSQL_PASS = 'chengca'
+         MYSQL_USER = '******'
+         MYSQL_PASS = '******'
          MYSQL_HOST = 'localhost'
          MYSQL_PORT = '3306'
 
@@ -76,12 +76,20 @@ How to use
     WECHAT_APP_ID = u'your_app_id'
     WECHAT_APP_SECRET = u'your_app_secret'
 
+    # For wechat enterprise account.
+    CORPID = "your_corp_id"
+    TOKEN = "your_token"
+    EncodingAESKey = "your_encoding_aeskey"
+    SECRET = "your_secret"
+    AGENTID = "your_application_id"
+    SAFE = 0/1
+
 4. Configuration the django project in urls.py::
 
-   urlpatterns = [
-       url(r'^wechat/', include('wechat_api.urls', namespace='wechat_api')),
-       url(r'^enterprise/', include('enterprise_api.urls', namespace='enterprise_api')),
-   ]
+    urlpatterns = [
+        url(r'^wechat/', include('wechat_api.urls', namespace='wechat_api')),
+        url(r'^enterprise/', include('enterprise_api.urls', namespace='enterprise_api')),
+    ]
 
 5. Deploy your project on SAE or BAE to test::
 
@@ -90,6 +98,6 @@ How to use
 
 6. Register your wechat official account and fill in your SAE/BAE url and your tocken::
 
-    SAE_URL: http://<project>.applinzi.com/<wechat/enterprise>/
-    BAE_URL: http://<project>.duapp.com/<wechat/enterprise>/
+    URL(SAE): http://<project>.applinzi.com/<wechat/enterprise>/
+    URL(BAE): http://<project>.duapp.com/<wechat/enterprise>/
     TOKEN: yourtoken

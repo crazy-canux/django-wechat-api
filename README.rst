@@ -33,38 +33,6 @@ Django Application
 
 `[Application-Interface] <https://mp.weixin.qq.com/debug/wxadoc/dev/index.html>`_
 
-==========
-How to use
-==========
-
-Create django project wechat::
-
-    $django-admin startproject wechat
-
-Install django application django-wechat-api in your django project::
-
-    $pip install django-wechat-api
-
-Put your configuration in your django project in settings.py::
-
-    INSTALLED_APPS = (
-    ...
-    'wechat_api',
-    'enterprise_api',
-    'application_api'
-    )
-
-    MYSQL_DB = 'wechat'
-    MYSQL_USER = 'django'
-    MYSQL_PASS = '******'
-    MYSQL_HOST = 'localhost'
-    MYSQL_PORT = '3306'
-
-    # For subscribe and service account.
-    WECHAT_TOKEN = u'your_token'
-    WECHAT_APP_ID = u'your_app_id'
-    WECHAT_APP_SECRET = u'your_app_secret'
-
 ====
 Test
 ====

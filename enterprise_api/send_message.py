@@ -10,14 +10,16 @@ Author: Canux CHENG canuxcheng@gmail.com
 Version: V1.0.0.0
 Time: Sun 13 Nov 2016 01:58:36 AM EST
 
-发送消息需要获取access_token和对应的url。
+主动发送消息需要获取access_token和对应的url。
 
 没有实现的消息类型：
 1. news
 2. mpnews
 """
-AGENT_ID = 1
-SAFE = 0
+from django.conf import settings
+
+AGENT_ID = settings.AGENTID
+SAFE = settings.SAFE
 
 
 class SendText(object):

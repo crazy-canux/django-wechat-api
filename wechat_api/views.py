@@ -41,6 +41,9 @@ RESP_MESSAGE_TYPE_MUSIC = u'music'
 RESP_MESSAGE_TYPE_NEWS = u'news'
 MESSAGE_TYPE = [u'text', u'image', u'voice', u'video', u'music', u'news']
 
+# 订阅号或服务号的token
+TOKEN = settings.WECHAT_TOKEN
+
 
 @csrf_exempt
 def wechat_varify(request):
@@ -52,11 +55,9 @@ def wechat_varify(request):
     """
     if request.method == "GET":
         # Wechat server sent GET request to the URL to verify.
-        print("Start to get")
         return HttpResponse(WechatRequest.get_request(request), content_type="text/plain")
     elif request.method == "POST":
         # Wechat user POST the message to the URL with XML format.
-        print("Start to post")
         return HttpResponse(WechatRequest.post_request(request), content_type="application/xml")
     else:
         return None
@@ -82,7 +83,7 @@ class WechatRequest(object):
         timestamp = request.GET.get("timestamp", None)
         nonce = request.GET.get("nonce", None)
         echostr = request.GET.get("echostr", None)
-        token = settings.WECHAT_TOKEN
+        token = TOKEN
 
         tmp_list = [token, timestamp, nonce]
         tmp_list.sort()
@@ -97,10 +98,8 @@ class WechatRequest(object):
         # hashcode = hashlib.sha1(tmp_str).hexdigest()
 
         if hashcode == signature:
-            print("get succeed")
             return echostr
         else:
-            print("get failed")
             return None
 
     @staticmethod
@@ -133,8 +132,8 @@ class WechatRequest(object):
             # If return nothing from how-old.net.
             if not response_content:
                 response_content = u"只识别男女哦，不要发人妖!"
-            response_text_object = Text(FromUserName, ToUserName, response_content)
-            return response_text_object.response()
+            response_image_object = Text(FromUserName, ToUserName, response_content)
+            return response_image_object.response()
         elif MsgType == REC_MESSAGE_TYPE_VOICE:
             return BasicResponse().response()
         elif MsgType == REC_MESSAGE_TYPE_VIDEO:
