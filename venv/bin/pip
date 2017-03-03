@@ -1,4 +1,4 @@
-#!/home/chengca/myCode/django-wechat-api/.venv/bin/python
+#!/home/chengca/myCode/django-wechat-api/venv/bin/python
 
 # -*- coding: utf-8 -*-
 import re

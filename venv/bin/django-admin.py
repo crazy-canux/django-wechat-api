@@ -1,4 +1,4 @@
-#!/home/chengca/myCode/django-wechat-api/.venv/bin/python
+#!/home/chengca/myCode/django-wechat-api/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
