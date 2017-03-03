@@ -80,7 +80,8 @@ pip-delete-this-directory.txt
 #.env
 
 # virtualenv
-.venv
+# For SAE site-package.
+# .venv
 venv/
 ENV/
 

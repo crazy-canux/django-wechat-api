@@ -147,11 +147,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 WECHAT_TOKEN = "canux"
 WECHAT_APP_ID = ""
 WECHAT_APP_SECRET = ""
+WECHAT_EncodingAESKey = ""
 
 # For wechat enterprise account
 CORPID = "wx2b60193d11c71526"
 TOKEN = "canux"
 EncodingAESKey = "6L6XDzj7GGdRSDTET6J4FMklM5FZKM8gKc76hlaplSl"
-SECRET = "Ox9khNJ72tR-I6TnRLUnmdYvzIatUjruTXCD-uhjRux0sBBKCXA1XeGeJ-jF7LKy"
-AGENTID = 1
+SECRET = ""
+AGENTID = 0
 SAFE = 0
