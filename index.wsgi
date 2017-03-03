@@ -3,6 +3,7 @@
 import sae
 
 # For SAE to add third party libraries.
+# $pip install -t site-packages -r requirements.txt
 #import os
 #import sys
 #root = os.path.dirname(__file__)
