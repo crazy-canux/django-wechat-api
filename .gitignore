@@ -81,8 +81,7 @@ pip-delete-this-directory.txt
 
 # virtualenv
 .venv
-# For SAE site-package.
-#venv/
+venv/
 ENV/
 
 # Spyder project settings

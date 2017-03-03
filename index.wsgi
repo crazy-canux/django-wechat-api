@@ -3,10 +3,10 @@
 import sae
 
 # For SAE to add third party libraries.
-import os
-import sys
-root = os.path.dirname(__file__)
-sys.path.insert(0, os.path.join(root, ".venv"))
+#import os
+#import sys
+#root = os.path.dirname(__file__)
+#sys.path.insert(0, os.path.join(root, "site-packages"))
 
 from wechat import wsgi
 
