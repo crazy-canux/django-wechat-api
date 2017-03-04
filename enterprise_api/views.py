@@ -51,7 +51,8 @@ CORPID = settings.CORPID
 # Token可由企业任意填写，用于生成签名。
 TOKEN = settings.TOKEN
 # EncodingAESKey用于消息体的加密，是AES密钥的Base64编码。
-EncodingAESKey = settings.EncodingAESKey
+EncodingAESKey = settings.ENCODINGAESKEY
+
 
 @csrf_exempt
 def wechat_varify(request):
