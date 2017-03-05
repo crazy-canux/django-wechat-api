@@ -82,6 +82,9 @@ XXXZZZZ is the test Wechat Official Subscribe Account.
 
 Canux is the test Wechat Official Enterprise Account.
 
+.. figure:: https://github.com/crazy-canux/django-wechat-api/blob/master/data/images/we.jpg
+   :alt: pic
+
 =============
 Documentation
 =============
