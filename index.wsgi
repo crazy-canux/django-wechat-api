@@ -4,6 +4,7 @@ import sae
 
 # For SAE to add third party libraries.
 # $pip install -t vendor -r requirements.txt
+# If folder name vendor, SAE default add it.
 #import os
 #import sys
 #root = os.path.dirname(__file__)

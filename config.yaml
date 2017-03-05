@@ -2,15 +2,19 @@ name: wechat
 version: 1
 
 libraries:
+# SAE don't have this version.
 - name: "django"
   version: "1.8.2"
 
+# SAE don't have this library.
 - name: "requests"
   version: "2.11.1"
 
+# SAE have it, but don't have default version.
 - name: "lxml"
   version: "2.3.4"
 
+# SAE have it, but don't have default version.
 - name: "PyCrypto"
   version: "2.6"
 

@@ -79,10 +79,10 @@ How to use
     # For wechat enterprise account.
     CORPID = "your_corp_id"
     TOKEN = "your_token"
-    EncodingAESKey = "your_encoding_aeskey"
+    ENCODINGAESKEY = "your_encoding_aeskey"
     SECRET = "your_secret"
-    AGENTID = "your_application_id"
-    SAFE = 0/1
+    AGENTID = 0
+    SAFE = 0
 
 4. Configuration the django project in urls.py::
 
