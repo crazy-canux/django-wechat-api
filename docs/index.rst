@@ -27,7 +27,6 @@ The User Guid
    wechat
    wechat_api
    enterprise_api
-   application_api
 
 
 

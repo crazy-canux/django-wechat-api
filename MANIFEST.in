@@ -1,4 +1,5 @@
 include LICENSE README.rst AUTHORS.rst CONTRIBUTING.rst
 recursive-include docs *
 include data/images/xfullstack.png
+include data/images/xxxzzzz.jpg
 global-exclude *.py[co]

@@ -85,6 +85,12 @@ Canux is the test Wechat Official Enterprise Account.
 .. figure:: https://github.com/crazy-canux/django-wechat-api/blob/master/data/images/we.jpg
    :alt: pic
 
+====
+Todo
+====
+
+* Distribute 2.0.0 to pypi.
+
 =============
 Documentation
 =============

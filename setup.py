@@ -37,8 +37,8 @@ def read(readme):
         return pypandoc.convert(readme, 'rst')
 
 INSTALL_REQUIRES = [
-    'requests',
-    'lxml'
+    'Django==1.8.2',
+    'requests==2.11.1',
 ]
 
 setup(
@@ -55,7 +55,7 @@ setup(
     license='GPL',
     platforms='any',
     install_requires=INSTALL_REQUIRES,
-    packages=find_packages(),
+    packages=find_packages(exclude=['wechat', 'vendor', 'static', 'templates']),
     zip_safe=False,
     include_package_data=True,
     classifiers=[
