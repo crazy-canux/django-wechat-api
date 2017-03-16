@@ -17,10 +17,10 @@ import os
 
 from setuptools import setup, find_packages
 
-import wechat_api
+import wechat
 
 NAME = 'django-wechat-api'
-VERSION = wechat_api.__version__
+VERSION = wechat.__version__
 URL = 'https://github.com/crazy-canux/django-wechat-api'
 DESCRIPTION = "Pure python/django for wechat official account interface."
 KEYWORD = "python django wechat"
@@ -55,7 +55,7 @@ setup(
     license='GPL',
     platforms='any',
     install_requires=INSTALL_REQUIRES,
-    packages=find_packages(exclude=['wechat', 'vendor', 'static', 'templates']),
+    packages=find_packages(exclude=['wechat']),
     zip_safe=False,
     include_package_data=True,
     classifiers=[
