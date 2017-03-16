@@ -5,6 +5,13 @@
 .. image:: https://img.shields.io/pypi/dm/django-wechat-api.svg?style=plastic
    :target: https://pypi.python.org/pypi/django-wechat-api/
 
+.. image:: https://travis-ci.org/crazy-canux/django-wechat-api.svg?branch=master
+   :target: https://travis-ci.org/crazy-canux/django-wechat-api
+
+.. image:: https://coveralls.io/repos/github/crazy-canux/django-wechat-api/badge.svg?branch=master
+   :target: https://coveralls.io/github/crazy-canux/django-wechat-api?branch=master
+
+
 ==============
 Django Project
 ==============

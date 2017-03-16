@@ -36,10 +36,7 @@ def read(readme):
         import pypandoc
         return pypandoc.convert(readme, 'rst')
 
-INSTALL_REQUIRES = [
-    'Django==1.8.2',
-    'requests==2.11.1',
-]
+INSTALL_REQUIRES = []
 
 setup(
     name=NAME,
