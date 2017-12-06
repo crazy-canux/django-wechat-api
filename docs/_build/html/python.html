@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>python开发微信公众号 &mdash; django-wechat-api 2.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="django-wechat-api 2.0.0 documentation" href="index.html" />
+    <link rel="prev" title="enterprise_api" href="enterprise_api.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python">
+<span id="id1"></span><h1>python开发微信公众号<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>注册微信公众号(订阅号/服务号，企业号, 小程序)</li>
+<li>在微信公众平台（开发-&gt;基本配置）修改服务器配置，URL添加你的代码的URL，Token添加你代码中的Token。</li>
+<li>用git管理代码提交到URL，或者部署到云服务器。</li>
+</ol>
+<p>微信开发文档：</p>
+<p><a class="reference external" href="https://mp.weixin.qq.com/">[wechat docs]</a></p>
+<p>流程:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>wechat user &lt;=&gt; send/receive message &lt;=&gt; wechat server &lt;=&gt; POST XML message &lt;=&gt; your server
+</pre></div>
+</div>
+</div>
+<div class="section" id="django">
+<h1>云平台部署django项目<a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.sinacloud.com/doc/sae/python/index.html">[SAE]</a></p>
+<p><a class="reference external" href="https://cloud.baidu.com/doc/BAE/QuickGuide.html">[BAE]</a></p>
+<p>SAE添加第三方依赖：</p>
+<p><a class="reference external" href="http://www.sinacloud.com/doc/sae/python/tools.html#tian-jia-di-san-fang-yi-lai-bao">[SAE vendor]</a></p>
+<p>BAE添加第三方依赖:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$vim requirements.txt
+django==1.8.2
+...
+</pre></div>
+</div>
+<p>使用mysql：</p>
+<p><a class="reference external" href="http://www.sinacloud.com/doc/sae/python/mysql.html#api-shi-yong-shou-ce">[SAE mysql]</a></p>
+<p>SAE平台需要config.yaml和index.wsgi两个文件.</p>
+<p>SAE的入口就是index.wsgi文件中名叫application的可调用对象。</p>
+<p>BAE平台需要app.conf,favicon.ico和index.py三个文件。</p>
+<p>BAE的入口就是index.py文件中名叫application的可调用对象。</p>
+</div>
+<div class="section" id="djangowechat">
+<h1>创建django项目wechat<a class="headerlink" href="#djangowechat" title="Permalink to this headline">¶</a></h1>
+<p>app.conf或conf.yaml添加配置文件。</p>
+<p>index.wsgi或index.py添加云平台入口。</p>
+<p>wechat/settings.py添加mysql数据库信息。</p>
+<p>在GAE/BAE/SAE设置mysql，在项目添加mysql的参数。</p>
+<p>用migrate同步本地数据库后，用下面命令导出本地数据为sql文件:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ python manage.py migrate
+$ mysqldump -u &lt;username&gt; -p &lt;databasename&gt; &gt; &lt;filename&gt;.sql
+</pre></div>
+</div>
+<p>在GAE/BAE/SAE上传sql文件把数据同步到GAE/BAE/SAE的mysql。</p>
+</div>
+<div class="section" id="djangodjango-wechat-api">
+<h1>创建django的应用django-wechat-api<a class="headerlink" href="#djangodjango-wechat-api" title="Permalink to this headline">¶</a></h1>
+<p>在wechat/settings.py中添加应用。</p>
+<p>在wechat/urls.py中添加应用的url。</p>
+<p>在django-wechat-api/views.py添加微信接口。</p>
+</div>
+<div class="section" id="wechat">
+<h1>修改wechat公众平台配置<a class="headerlink" href="#wechat" title="Permalink to this headline">¶</a></h1>
+<p>配置:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>SAE_URL: http://&lt;project&gt;.applinzi.com/wechat/
+BAE_URL: http://&lt;project&gt;.duapp.com/wechat/
+TOKEN: yourtoken
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h1>django开发的wechat接口开源项目<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<p>源码参考:</p>
+<p><a class="reference external" href="https://github.com/crazy-canux/django-wechat-api">[github]</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-wechat-api</a></h1>
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=crazy-canux&repo=django-wechat-api&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wechat.html">wechat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wechat_api.html">wechat_api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enterprise_api.html">enterprise_api</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">python开发微信公众号</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#django">云平台部署django项目</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#djangowechat">创建django项目wechat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#djangodjango-wechat-api">创建django的应用django-wechat-api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#wechat">修改wechat公众平台配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id2">django开发的wechat接口开源项目</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="enterprise_api.html" title="previous chapter">enterprise_api</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, <a href="http://canuxcheng.com">Canux CHENG</a>.
+      
+      |
+      <a href="_sources/python.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/crazy-canux/django-wechat-api" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
