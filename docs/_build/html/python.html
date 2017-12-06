@@ -51,9 +51,8 @@
 <div class="highlight-python"><div class="highlight"><pre><span></span>wechat user &lt;=&gt; send/receive message &lt;=&gt; wechat server &lt;=&gt; POST XML message &lt;=&gt; your server
 </pre></div>
 </div>
-</div>
 <div class="section" id="django">
-<h1>云平台部署django项目<a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h1>
+<h2>云平台部署django项目<a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.sinacloud.com/doc/sae/python/index.html">[SAE]</a></p>
 <p><a class="reference external" href="https://cloud.baidu.com/doc/BAE/QuickGuide.html">[BAE]</a></p>
 <p>SAE添加第三方依赖：</p>
@@ -72,7 +71,7 @@ django==1.8.2
 <p>BAE的入口就是index.py文件中名叫application的可调用对象。</p>
 </div>
 <div class="section" id="djangowechat">
-<h1>创建django项目wechat<a class="headerlink" href="#djangowechat" title="Permalink to this headline">¶</a></h1>
+<h2>创建django项目wechat<a class="headerlink" href="#djangowechat" title="Permalink to this headline">¶</a></h2>
 <p>app.conf或conf.yaml添加配置文件。</p>
 <p>index.wsgi或index.py添加云平台入口。</p>
 <p>wechat/settings.py添加mysql数据库信息。</p>
@@ -85,13 +84,13 @@ $ mysqldump -u &lt;username&gt; -p &lt;databasename&gt; &gt; &lt;filename&gt;.sq
 <p>在GAE/BAE/SAE上传sql文件把数据同步到GAE/BAE/SAE的mysql。</p>
 </div>
 <div class="section" id="djangodjango-wechat-api">
-<h1>创建django的应用django-wechat-api<a class="headerlink" href="#djangodjango-wechat-api" title="Permalink to this headline">¶</a></h1>
+<h2>创建django的应用django-wechat-api<a class="headerlink" href="#djangodjango-wechat-api" title="Permalink to this headline">¶</a></h2>
 <p>在wechat/settings.py中添加应用。</p>
 <p>在wechat/urls.py中添加应用的url。</p>
 <p>在django-wechat-api/views.py添加微信接口。</p>
 </div>
 <div class="section" id="wechat">
-<h1>修改wechat公众平台配置<a class="headerlink" href="#wechat" title="Permalink to this headline">¶</a></h1>
+<h2>修改wechat公众平台配置<a class="headerlink" href="#wechat" title="Permalink to this headline">¶</a></h2>
 <p>配置:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>SAE_URL: http://&lt;project&gt;.applinzi.com/wechat/
 BAE_URL: http://&lt;project&gt;.duapp.com/wechat/
@@ -100,9 +99,10 @@ TOKEN: yourtoken
 </div>
 </div>
 <div class="section" id="id2">
-<h1>django开发的wechat接口开源项目<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<h2>django开发的wechat接口开源项目<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>源码参考:</p>
 <p><a class="reference external" href="https://github.com/crazy-canux/django-wechat-api">[github]</a></p>
+</div>
 </div>
 
 
@@ -128,12 +128,14 @@ TOKEN: yourtoken
 <li class="toctree-l1"><a class="reference internal" href="wechat.html">wechat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wechat_api.html">wechat_api</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enterprise_api.html">enterprise_api</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">python开发微信公众号</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#django">云平台部署django项目</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#djangowechat">创建django项目wechat</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#djangodjango-wechat-api">创建django的应用django-wechat-api</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#wechat">修改wechat公众平台配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id2">django开发的wechat接口开源项目</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">python开发微信公众号</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#django">云平台部署django项目</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#djangowechat">创建django项目wechat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#djangodjango-wechat-api">创建django的应用django-wechat-api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wechat">修改wechat公众平台配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">django开发的wechat接口开源项目</a></li>
+</ul>
+</li>
 </ul>
 
 <div class="relations">

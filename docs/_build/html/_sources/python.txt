@@ -16,7 +16,7 @@ python开发微信公众号
     wechat user <=> send/receive message <=> wechat server <=> POST XML message <=> your server
 
 云平台部署django项目
-====================
+--------------------
 
 `[SAE] <http://www.sinacloud.com/doc/sae/python/index.html>`_
 
@@ -45,7 +45,7 @@ BAE平台需要app.conf,favicon.ico和index.py三个文件。
 BAE的入口就是index.py文件中名叫application的可调用对象。
 
 创建django项目wechat
-====================
+--------------------
 
 app.conf或conf.yaml添加配置文件。
 
@@ -63,7 +63,7 @@ wechat/settings.py添加mysql数据库信息。
 在GAE/BAE/SAE上传sql文件把数据同步到GAE/BAE/SAE的mysql。
 
 创建django的应用django-wechat-api
-=================================
+---------------------------------
 
 在wechat/settings.py中添加应用。
 
@@ -72,7 +72,7 @@ wechat/settings.py添加mysql数据库信息。
 在django-wechat-api/views.py添加微信接口。
 
 修改wechat公众平台配置
-======================
+----------------------
 
 配置::
 
@@ -81,7 +81,7 @@ wechat/settings.py添加mysql数据库信息。
     TOKEN: yourtoken
 
 django开发的wechat接口开源项目
-==============================
+------------------------------
 
 源码参考:
 
