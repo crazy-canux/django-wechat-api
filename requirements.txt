@@ -1,6 +1,6 @@
 Django==1.8.2
 argparse==1.2.1
 lxml==2.3.4
-pycrypto==2.6
+pycrypto==2.6.1
 requests==2.11.1
 wsgiref==0.1.2
