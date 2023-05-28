@@ -66,7 +66,7 @@ import requests
 
 # Define tuling API.
 TULING_API = "http://www.tuling123.com/openapi/api"
-TULING_APIKEY = "b4987475ebed4c4c9684237ffc1d6dc0"
+TULING_APIKEY = "******"
 
 
 def tuling_robot(info, userid):
